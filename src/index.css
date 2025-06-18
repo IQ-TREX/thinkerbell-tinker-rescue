@@ -1,6 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
@@ -37,47 +41,32 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -99,5 +88,349 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+/* Thinkerbell Custom Styles */
+
+/* VHS Distortion Overlay */
+.vhs-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.15;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 0, 0.03) 2px,
+      rgba(0, 255, 0, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 0, 255, 0.03) 2px,
+      rgba(255, 0, 255, 0.03) 4px
+    );
+  animation: vhs-distortion 3s infinite linear;
+}
+
+@keyframes vhs-distortion {
+  0% { transform: translate(0px, 0px); }
+  10% { transform: translate(-2px, -1px); }
+  20% { transform: translate(-1px, 0px); }
+  30% { transform: translate(1px, 2px); }
+  40% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 2px); }
+  60% { transform: translate(-1px, 1px); }
+  70% { transform: translate(0px, 1px); }
+  80% { transform: translate(-1px, -1px); }
+  90% { transform: translate(1px, 0px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+/* Scanlines */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 240, 255, 0.08) 1px,
+    rgba(0, 240, 255, 0.08) 2px
+  );
+  animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(2px); }
+}
+
+/* Glitch Text Effects */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text-main {
+  position: relative;
+  z-index: 3;
+}
+
+.glitch-text-copy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.glitch-text-copy:nth-child(2) {
+  color: #00F0FF;
+  animation: glitch-1 0.5s infinite;
+}
+
+.glitch-text-copy:nth-child(3) {
+  color: #E62E2E;
+  animation: glitch-2 0.7s infinite;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translate(0);
+  }
+  15%, 49% {
+    transform: translate(-2px, -1px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translate(0);
+  }
+  21%, 62% {
+    transform: translate(2px, 1px);
+  }
+}
+
+/* Flickering Animation */
+.flickering {
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+  }
+  4%, 19%, 23%, 54% {
+    opacity: 0.3;
+  }
+}
+
+/* Glow Effects */
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+}
+
+/* Glitch Border */
+.glitch-border {
+  position: relative;
+}
+
+.glitch-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #00F0FF;
+  animation: border-glitch 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes border-glitch {
+  0%, 100% { 
+    border-color: #00F0FF; 
+    transform: translate(0);
+  }
+  20% { 
+    border-color: #E62E2E; 
+    transform: translate(-1px, 1px);
+  }
+  40% { 
+    border-color: #0055FF; 
+    transform: translate(1px, -1px);
+  }
+  60% { 
+    border-color: #00F0FF; 
+    transform: translate(0);
+  }
+  80% { 
+    border-color: #E62E2E; 
+    transform: translate(1px, 1px);
+  }
+}
+
+/* Coffee Steam Animation */
+.coffee-cup {
+  position: relative;
+}
+
+.steam {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50%;
+  animation: steam-rise 1.5s infinite ease-out;
+}
+
+.steam::before,
+.steam::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 50%;
+}
+
+.steam::before {
+  left: -5px;
+  animation: steam-rise 1.5s infinite ease-out 0.3s;
+}
+
+.steam::after {
+  right: -5px;
+  animation: steam-rise 1.5s infinite ease-out 0.6s;
+}
+
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(-5deg);
+  }
+}
+
+/* Machine Part Animations */
+.machine-part {
+  transition: all 0.3s ease;
+}
+
+.machine-part:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 85, 255, 0.3);
+}
+
+.machine-part.pulse-glow {
+  animation: pulse-glow 1s ease-out;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+    transform: scale(1);
+  }
+}
+
+/* Terminal Styling */
+.terminal-output {
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.glitch-input {
+  position: relative;
+}
+
+.glitch-input:focus {
+  animation: input-glitch 0.1s;
+}
+
+@keyframes input-glitch {
+  0%, 100% { border-color: #00F0FF; }
+  50% { border-color: #E62E2E; }
+}
+
+/* Countdown Display */
+.countdown-display {
+  font-family: 'Rubik Mono One', monospace;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+/* Fade In Animation */
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glitch-text {
+    font-size: 2rem !important;
+  }
+  
+  .machine-part {
+    padding: 1rem;
+  }
+  
+  .coffee-cup {
+    font-size: 3rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .vhs-overlay,
+  .scanlines,
+  .flickering,
+  .glitch-text-copy {
+    animation: none;
+  }
+  
+  .steam {
+    display: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .vhs-overlay {
+    display: none;
+  }
+  
+  .scanlines {
+    opacity: 0.3;
   }
 }
