@@ -10,10 +10,10 @@ const GlitchText = ({ text, className = '' }: GlitchTextProps) => {
   const [glitchText, setGlitchText] = useState(text);
 
   useEffect(() => {
-    const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
+    const glitchChars = '!<>-_\\/[]{}—=+*^?#01_____';
     
     const glitchInterval = setInterval(() => {
-      if (Math.random() > 0.9) {
+      if (Math.random() > 0.85) {
         const newText = text
           .split('')
           .map(char => 
@@ -25,9 +25,9 @@ const GlitchText = ({ text, className = '' }: GlitchTextProps) => {
         
         setGlitchText(newText);
         
-        setTimeout(() => setGlitchText(text), 100);
+        setTimeout(() => setGlitchText(text), 150);
       }
-    }, 200);
+    }, 300);
 
     return () => clearInterval(glitchInterval);
   }, [text]);

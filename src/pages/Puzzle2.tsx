@@ -6,17 +6,15 @@ import AudioManager from '../components/AudioManager';
 const Puzzle2 = () => {
   const [input, setInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState<string[]>([
-    '>> THINKERBELL PROTOCOL v7.3',
-    '>> INITIALIZING MAGIC HOUR SEQUENCE...',
-    '>> ERROR: BELL MODULE OFFLINE',
-    '>> ACTION REQUIRED: ACTIVATE_MAGIC_HOUR_SEQUENCE',
-    '>> SYSTEM PROMPT: RING_WHEN_MAGIC_HOUR_NEARS',
-    '>> type_command_here'
+    '> THINKERBELL PROTOCOL v7.3',
+    '> INITIALIZING MAGIC HOUR SEQUENCE...',
+    '> ERROR: BELL MODULE OFFLINE',
+    '> ACTION REQUIRED: ACTIVATE_MAGIC_HOUR_SEQUENCE',
+    '> SYSTEM PROMPT: RING_WHEN_MAGIC_HOUR_NEARS',
+    '> type_command_here'
   ]);
   const [showCountdown, setShowCountdown] = useState(false);
   const [countdown, setCountdown] = useState(300); // 5 minutes
-  const [currentCommand, setCurrentCommand] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,10 +27,10 @@ const Puzzle2 = () => {
     if (command === 'bellthink') {
       setTerminalHistory(prev => [
         ...prev,
-        '>> COMMAND ACCEPTED',
-        '>> BELL MODULE: ACTIVATING...',
-        '>> MAGIC HOUR SEQUENCE: INITIATED',
-        '>> COUNTDOWN TO MAGIC HOUR: STARTING'
+        '> COMMAND ACCEPTED',
+        '> BELL MODULE: ACTIVATING...',
+        '> MAGIC HOUR SEQUENCE: INITIATED',
+        '> COUNTDOWN TO MAGIC HOUR: STARTING'
       ]);
       
       AudioManager.playBellChime();
@@ -44,24 +42,13 @@ const Puzzle2 = () => {
     } else {
       setTerminalHistory(prev => [
         ...prev,
-        '>> COMMAND NOT RECOGNIZED',
-        '>> HINT: THE BELL NEEDS TO THINK...'
+        '> COMMAND NOT RECOGNIZED',
+        '> HINT: THE BELL NEEDS TO THINK...'
       ]);
       AudioManager.playError();
     }
     
     setInput('');
-  };
-
-  // Matrix-style typing effect
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInput(value);
-    
-    if (!isTyping && value.length > 0) {
-      setIsTyping(true);
-      setTimeout(() => setIsTyping(false), 100);
-    }
   };
 
   // Countdown timer
@@ -88,96 +75,89 @@ const Puzzle2 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#00F0FF] p-4 font-mono relative overflow-hidden">
-      {/* VHS Overlay */}
-      <div className="vhs-overlay"></div>
-      <div className="scanlines"></div>
-      
-      <div className="relative z-10 max-w-4xl mx-auto">
-        {/* Terminal Header */}
-        <div className="border border-[#0055FF] bg-black/90 rounded-lg p-6 mb-6">
-          <div className="flex items-center mb-4">
-            <div className="w-3 h-3 bg-[#E62E2E] rounded-full mr-2"></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-            <span className="text-sm text-gray-400 ml-4">THINKERBELL_TERMINAL.exe</span>
-          </div>
-          
-          {/* Terminal Output */}
-          <div className="terminal-output space-y-2 mb-4 h-96 overflow-y-auto">
-            {terminalHistory.map((line, index) => (
-              <div 
-                key={index} 
-                className={`${
-                  line.startsWith('>>') ? 'text-[#0055FF]' : 
-                  line.startsWith('> ') ? 'text-[#00F0FF]' :
-                  'text-gray-300'
-                } ${line.includes('ERROR') ? 'text-[#E62E2E] flickering' : ''}`}
-              >
-                {line}
-              </div>
-            ))}
+    <div className="min-h-screen bg-black crt-monitor">
+      <div className="crt-screen min-h-screen p-6">
+        <div className="relative z-20 max-w-4xl mx-auto">
+          {/* Terminal Header */}
+          <div className="terminal-box p-6 mb-6">
+            <div className="flex items-center mb-4">
+              <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+              <span className="text-sm terminal-text-dim ml-4">THINKERBELL_TERMINAL.exe</span>
+            </div>
             
-            {isTyping && (
-              <div className="text-[#00F0FF]">
-                {Array.from({ length: Math.floor(Math.random() * 10) + 5 }).map((_, i) => (
-                  <span key={i} className="inline-block animate-pulse">
-                    {String.fromCharCode(33 + Math.floor(Math.random() * 94))}
-                  </span>
-                ))}
+            {/* Terminal Output */}
+            <div className="terminal-output space-y-2 mb-6 h-96 overflow-y-auto p-4">
+              {terminalHistory.map((line, index) => (
+                <div 
+                  key={index} 
+                  className={`font-mono ${
+                    line.includes('ERROR') ? 'terminal-error flickering' : 
+                    line.includes('COMMAND ACCEPTED') || line.includes('ACTIVATED') ? 'terminal-text-bright' :
+                    'terminal-text'
+                  }`}
+                >
+                  {line}
+                </div>
+              ))}
+              <div className="terminal-cursor">█</div>
+            </div>
+            
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="flex items-center terminal-box p-3">
+              <span className="terminal-text-bright mr-2">&gt;</span>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="type_command_here"
+                className="flex-1 terminal-input bg-transparent border-none outline-none"
+                autoComplete="off"
+              />
+              <div className="terminal-cursor ml-1">█</div>
+            </form>
+          </div>
+
+          {/* Magic Hour Countdown */}
+          {showCountdown && (
+            <div className="terminal-box p-6 text-center mb-6">
+              <h2 className="text-2xl font-bold terminal-text-bright mb-4">
+                MAGIC_HOUR_ACTIVATED
+              </h2>
+              <div className="text-6xl font-bold countdown-display mb-4">
+                {formatTime(countdown)}
               </div>
-            )}
-          </div>
-          
-          {/* Input */}
-          <form onSubmit={handleSubmit} className="flex items-center">
-            <span className="text-[#0055FF] mr-2">&gt;</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              placeholder="type_command_here"
-              className="flex-1 bg-transparent border-none outline-none text-[#00F0FF] placeholder-gray-500"
-              autoComplete="off"
-            />
-            <div className="w-2 h-5 bg-[#00F0FF] animate-pulse ml-1"></div>
-          </form>
-        </div>
-
-        {/* Magic Hour Countdown */}
-        {showCountdown && (
-          <div className="border border-[#00F0FF] bg-black/90 rounded-lg p-6 text-center">
-            <h2 className="text-2xl font-bold text-[#0055FF] mb-4 glitch-text">
-              MAGIC HOUR ACTIVATED
-            </h2>
-            <div className="text-6xl font-bold text-[#00F0FF] mb-4 countdown-display">
-              {formatTime(countdown)}
+              <p className="text-lg terminal-text">
+                &gt; THE BELL RESONATES... MAGIC HOUR APPROACHES...
+              </p>
             </div>
-            <p className="text-lg text-gray-300">
-              The bell resonates... Magic hour approaches...
-            </p>
+          )}
+
+          {/* Help Section */}
+          <div className="terminal-box p-4 mb-6">
+            <details>
+              <summary className="terminal-text-bright cursor-pointer hover:text-shadow transition-colors font-mono">
+                [SYSTEM_HELP]
+              </summary>
+              <div className="mt-4 space-y-2 terminal-text-dim font-mono">
+                <div>&gt; Available commands: Unknown - discover through experimentation</div>
+                <div>&gt; Hint: What makes a bell think?</div>
+                <div>&gt; Case sensitivity: Disabled for user convenience</div>
+                <div>&gt; Emergency protocol: Contact system administrator</div>
+              </div>
+            </details>
           </div>
-        )}
 
-        {/* Help Section */}
-        <div className="mt-8 text-center">
-          <details className="border border-[#0055FF] bg-black/90 rounded-lg p-4">
-            <summary className="text-[#0055FF] cursor-pointer hover:text-[#00F0FF] transition-colors">
-              SYSTEM HELP
-            </summary>
-            <div className="mt-4 text-left space-y-2 text-gray-300">
-              <p>• Available commands: Unknown - discover through experimentation</p>
-              <p>• Hint: What makes a bell think?</p>
-              <p>• Case sensitivity: Disabled for user convenience</p>
-              <p>• Emergency protocol: Contact system administrator</p>
+          {/* Progress */}
+          <div className="text-center">
+            <div className="terminal-box p-3">
+              <div className="text-sm terminal-text-dim font-mono">
+                PUZZLE_2_OF_2 | STATUS: {showCountdown ? 'MAGIC_HOUR_INITIATED' : 'AWAITING_COMMAND'}
+              </div>
             </div>
-          </details>
-        </div>
-
-        {/* Progress */}
-        <div className="mt-8 text-center text-sm text-gray-400">
-          PUZZLE 2 OF 2 | STATUS: {showCountdown ? 'MAGIC HOUR INITIATED' : 'AWAITING COMMAND'}
+          </div>
         </div>
       </div>
     </div>

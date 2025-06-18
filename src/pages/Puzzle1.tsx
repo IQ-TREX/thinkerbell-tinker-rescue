@@ -22,10 +22,10 @@ const Puzzle1 = () => {
   const correctSequence = ['INPUT', 'PROCESS', 'OUTPUT', 'MEASURE'];
   
   const machineParts: MachinePart[] = [
-    { id: '1', type: 'INPUT', name: 'Creative Fuel', icon: '☕', description: 'Raw inspiration and ideas' },
-    { id: '2', type: 'PROCESS', name: 'Design Engine', icon: '⚙️', description: 'Transform concepts into reality' },
-    { id: '3', type: 'OUTPUT', name: 'Magic Wand', icon: '🪄', description: 'Deliver enchanting solutions' },
-    { id: '4', type: 'MEASURE', name: 'Impact Gauge', icon: '📊', description: 'Quantify the magic created' }
+    { id: '1', type: 'INPUT', name: 'CREATIVE_FUEL', icon: '☕', description: 'Raw inspiration and ideas' },
+    { id: '2', type: 'PROCESS', name: 'DESIGN_ENGINE', icon: '⚙️', description: 'Transform concepts into reality' },
+    { id: '3', type: 'OUTPUT', name: 'MAGIC_WAND', icon: '🪄', description: 'Deliver enchanting solutions' },
+    { id: '4', type: 'MEASURE', name: 'IMPACT_GAUGE', icon: '📊', description: 'Quantify the magic created' }
   ];
 
   const handleDragStart = (e: React.DragEvent, partType: string) => {
@@ -72,89 +72,94 @@ const Puzzle1 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#00F0FF] p-4 relative overflow-hidden">
-      {/* VHS Overlay */}
-      <div className="vhs-overlay"></div>
-      <div className="scanlines"></div>
-      
-      {showParticles && <ParticleExplosion />}
-      
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-mono font-bold text-[#0055FF] mb-4 glitch-text">
-            REBUILD THE MACHINE
-          </h1>
-          <p className="text-xl font-mono text-[#00F0FF]">
-            Drag components in the correct sequence to restore the Measured Magic Machine
-          </p>
-        </div>
-
-        {/* Machine Parts */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-          {machineParts.map((part) => (
-            <div
-              key={part.id}
-              draggable
-              onDragStart={(e) => handleDragStart(e, part.type)}
-              className={`machine-part bg-black border-2 border-[#0055FF] p-6 rounded-lg cursor-move hover:border-[#00F0FF] hover:shadow-glow transition-all duration-300 ${
-                sequence.includes(part.type) ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              <div className="text-center">
-                <div className="text-4xl mb-2">{part.icon}</div>
-                <h3 className="text-xl font-mono font-bold text-[#0055FF] mb-1">{part.type}</h3>
-                <p className="text-sm font-mono text-[#00F0FF] mb-2">{part.name}</p>
-                <p className="text-xs text-gray-400">{part.description}</p>
+    <div className="min-h-screen bg-black crt-monitor">
+      <div className="crt-screen min-h-screen">
+        {showParticles && <ParticleExplosion />}
+        
+        <div className="relative z-20 max-w-6xl mx-auto p-6">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-4xl md:text-6xl font-mono font-bold terminal-text mb-4">
+              REBUILD_THE_MACHINE
+            </h1>
+            <div className="terminal-box p-4">
+              <div className="terminal-text text-lg">
+                &gt; DRAG COMPONENTS IN CORRECT SEQUENCE
+              </div>
+              <div className="terminal-text">
+                &gt; RESTORE MEASURED_MAGIC_MACHINE
               </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Drop Zone */}
-        <div
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-          className="machine-sequence bg-black border-2 border-dashed border-[#E62E2E] p-8 rounded-lg min-h-32 mb-6"
-        >
-          <h3 className="text-xl font-mono font-bold text-[#E62E2E] mb-4 text-center">
-            MACHINE SEQUENCE
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {sequence.length === 0 ? (
-              <p className="text-gray-500 font-mono">Drop components here in correct order...</p>
-            ) : (
-              sequence.map((item, index) => (
-                <div key={index} className="bg-[#0055FF] text-black px-4 py-2 rounded font-mono font-bold">
-                  {index + 1}. {item}
+          {/* Machine Parts */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            {machineParts.map((part) => (
+              <div
+                key={part.id}
+                draggable
+                onDragStart={(e) => handleDragStart(e, part.type)}
+                className={`machine-part p-6 rounded cursor-move transition-all duration-300 ${
+                  sequence.includes(part.type) ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                <div className="text-center">
+                  <div className="text-4xl mb-2 terminal-text">{part.icon}</div>
+                  <h3 className="text-xl font-mono font-bold terminal-text-bright mb-1">{part.type}</h3>
+                  <p className="text-sm font-mono terminal-text mb-2">{part.name}</p>
+                  <p className="text-xs terminal-text-dim">{part.description}</p>
                 </div>
-              ))
+              </div>
+            ))}
+          </div>
+
+          {/* Drop Zone */}
+          <div
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            className="terminal-box p-8 min-h-32 mb-6 border-dashed"
+          >
+            <h3 className="text-xl font-mono font-bold terminal-text-bright mb-4 text-center">
+              MACHINE_SEQUENCE
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {sequence.length === 0 ? (
+                <p className="terminal-text-dim font-mono">&gt; DROP COMPONENTS HERE IN CORRECT ORDER...</p>
+              ) : (
+                sequence.map((item, index) => (
+                  <div key={index} className="terminal-button px-4 py-2 font-mono font-bold">
+                    {index + 1}. {item}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Controls */}
+          <div className="text-center space-y-4">
+            <button
+              onClick={resetSequence}
+              className="terminal-button py-2 px-6 font-mono font-bold"
+            >
+              [RESET_SEQUENCE]
+            </button>
+            
+            {showSuccess && (
+              <div className="terminal-box p-4">
+                <div className="text-2xl font-mono font-bold terminal-text-bright flickering">
+                  &gt; MACHINE RESTORED! PROCEEDING TO NEXT PHASE...
+                </div>
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Controls */}
-        <div className="text-center space-x-4">
-          <button
-            onClick={resetSequence}
-            className="bg-[#E62E2E] hover:bg-red-600 text-white font-mono font-bold py-2 px-6 border-2 border-[#E62E2E] transition-all duration-300"
-          >
-            RESET
-          </button>
-          
-          {showSuccess && (
-            <div className="mt-4 text-center">
-              <div className="text-2xl font-mono font-bold text-[#00F0FF] flickering">
-                MACHINE RESTORED! PROCEEDING TO NEXT PHASE...
+          {/* Progress Indicator */}
+          <div className="mt-8 text-center">
+            <div className="terminal-box p-3">
+              <div className="text-sm font-mono terminal-text-dim">
+                PUZZLE_1_OF_2 | SEQUENCE: {sequence.length}/{correctSequence.length}
               </div>
             </div>
-          )}
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="mt-8 text-center">
-          <div className="text-sm font-mono text-gray-400">
-            PUZZLE 1 OF 2 | SEQUENCE: {sequence.length}/{correctSequence.length}
           </div>
         </div>
       </div>
