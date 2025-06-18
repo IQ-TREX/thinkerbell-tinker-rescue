@@ -88,103 +88,408 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    background: #000;
-    color: #00ff00;
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+    background: linear-gradient(to bottom, #4a9eff, #0078d4);
+    color: #000;
   }
 }
 
-/* Terminal Monitor Styles */
+/* Windows XP Monitor Styles */
 
-/* CRT Monitor Frame */
-.crt-monitor {
-  background: #1a1a1a;
-  border: 20px solid #2a2a2a;
-  border-radius: 15px;
+.winxp-monitor {
+  max-width: 1200px;
+  position: relative;
+  background: linear-gradient(145deg, #e8e8e8, #c0c0c0);
+  border-radius: 20px 20px 40px 40px;
+  padding: 30px 30px 80px 30px;
   box-shadow: 
-    0 0 50px rgba(0, 0, 0, 0.8),
-    inset 0 0 20px rgba(0, 0, 0, 0.5);
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.monitor-stand {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 60px;
+  background: linear-gradient(145deg, #d0d0d0, #a0a0a0);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.monitor-screen {
+  width: 100%;
+  height: 700px;
+  background: #3a6ea5;
+  border: 3px solid #1e3a5f;
+  border-radius: 8px;
   position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Windows XP Taskbar */
+.winxp-taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, #245edb, #1941a5);
+  border-top: 1px solid #4a9eff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  z-index: 100;
+}
+
+.start-button {
+  background: linear-gradient(to bottom, #73b446, #5a9a3a);
+  border: 1px solid #3e7b2e;
+  border-radius: 6px;
+  padding: 6px 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.start-button:hover {
+  background: linear-gradient(to bottom, #7bc04a, #62a540);
+}
+
+.system-tray {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px inset #1941a5;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.tray-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 12px;
+}
+
+.clock {
+  color: white;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+}
+
+/* Windows XP Desktop */
+.winxp-desktop {
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="%23245edb"/><stop offset="100%" stop-color="%231941a5"/></radialGradient></defs><rect width="100" height="100" fill="url(%23g)"/></svg>');
+  background-size: cover;
+  position: relative;
+  padding: 20px;
   overflow: hidden;
 }
 
-.crt-monitor::before {
-  content: '';
+.desktop-icons {
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(45deg, #333, #222, #333);
-  border-radius: 20px;
-  z-index: -1;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-/* CRT Screen Effects */
-.crt-screen {
-  background: #000;
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.icon-image {
+  font-size: 32px;
+  margin-bottom: 4px;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.icon-label {
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'Tahoma', sans-serif;
+}
+
+/* Windows XP Window */
+.winxp-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90%;
+  background: #ece9d8;
+  border: 2px outset #ece9d8;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: 'Tahoma', sans-serif;
+}
+
+.window-titlebar {
+  background: linear-gradient(to bottom, #0997ff, #0053ee);
+  color: white;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px 6px 0 0;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.window-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.control-btn {
+  width: 21px;
+  height: 21px;
+  background: linear-gradient(to bottom, #e8e5f0, #d6d0df);
+  border: 1px outset #d6d0df;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background: linear-gradient(to bottom, #f0edf5, #e0dae8);
+}
+
+.control-btn.close {
+  background: linear-gradient(to bottom, #ff6b6b, #ff5252);
+  color: white;
+}
+
+.window-content {
+  padding: 20px;
+  background: #ece9d8;
+  min-height: 400px;
+  border-radius: 0 0 6px 6px;
+}
+
+/* Windows XP UI Elements */
+.winxp-button {
+  background: linear-gradient(to bottom, #e8e5f0, #d6d0df);
+  border: 1px outset #d6d0df;
+  color: #000;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-family: 'Tahoma', sans-serif;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.winxp-button:hover {
+  background: linear-gradient(to bottom, #f0edf5, #e0dae8);
+}
+
+.winxp-button:active {
+  border: 1px inset #d6d0df;
+  background: linear-gradient(to bottom, #d6d0df, #e8e5f0);
+}
+
+.winxp-input {
+  background: white;
+  border: 2px inset #d4d0c8;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: 'Tahoma', sans-serif;
+  width: 100%;
+}
+
+.winxp-input:focus {
+  outline: none;
+  border: 2px inset #316ac5;
+}
+
+.winxp-input-group {
+  margin-bottom: 12px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #000;
+  font-family: 'Tahoma', sans-serif;
+}
+
+.winxp-dialog {
+  background: #ece9d8;
+  border: 2px outset #ece9d8;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+
+.winxp-info-box {
+  background: #f0f0f0;
+  border: 1px inset #d4d0c8;
+  border-radius: 4px;
+}
+
+.winxp-error-text {
+  color: #c00;
+  font-family: 'Tahoma', sans-serif;
+  font-weight: bold;
+}
+
+.winxp-warning-text {
+  color: #ff8c00;
+  font-family: 'Tahoma', sans-serif;
+  font-weight: bold;
+}
+
+.winxp-error-msg {
+  color: #c00;
+  font-size: 11px;
+  margin-top: 4px;
+  font-family: 'Tahoma', sans-serif;
+}
+
+/* Pixelated Fairy Styles */
+.pixel-fairy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.fairy-fly {
+  animation: fairy-float 2s ease-in-out infinite;
+}
+
+@keyframes fairy-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.fairy-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  overflow: hidden;
 }
 
-.crt-screen::before {
-  content: '';
+.fairy-head,
+.fairy-torso {
+  display: flex;
+  flex-direction: column;
+}
+
+.fairy-wings {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 12px;
+  display: flex;
   width: 100%;
-  height: 100%;
-  background: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 255, 0, 0.03) 2px,
-      rgba(0, 255, 0, 0.03) 4px
-    );
-  pointer-events: none;
-  z-index: 10;
+  justify-content: space-between;
+  animation: wing-flap 0.8s ease-in-out infinite;
 }
 
-.crt-screen::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
-  pointer-events: none;
-  z-index: 11;
+@keyframes wing-flap {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
 }
 
-/* Terminal Text Effects */
-.terminal-text {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  color: #00ff00;
-  text-shadow: 
-    0 0 5px #00ff00,
-    0 0 10px #00ff00,
-    0 0 15px #00ff00;
-  letter-spacing: 0.05em;
+.wing-left {
+  transform: translateX(-8px);
 }
 
-.terminal-text-bright {
-  color: #00ff88;
-  text-shadow: 
-    0 0 5px #00ff88,
-    0 0 10px #00ff88,
-    0 0 15px #00ff88;
+.wing-right {
+  transform: translateX(8px);
 }
 
-.terminal-text-dim {
-  color: #008800;
-  text-shadow: 
-    0 0 3px #008800,
-    0 0 6px #008800;
+.pixel-row {
+  display: flex;
 }
 
-/* Terminal Cursor */
+.pixel {
+  width: 4px;
+  height: 4px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pixel-sparkle {
+  animation: sparkle-twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.sparkle-anim {
+  animation: sparkle-rotate 2s linear infinite;
+}
+
+@keyframes sparkle-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Keep existing glitch and animation styles */
 .terminal-cursor {
   display: inline-block;
   background: #00ff00;
@@ -196,60 +501,30 @@
   51%, 100% { opacity: 0; }
 }
 
-/* Terminal Input */
-.terminal-input {
-  background: transparent;
-  border: 1px solid #008800;
-  color: #00ff00;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  text-shadow: 0 0 5px #00ff00;
-  caret-color: #00ff00;
+.flickering {
+  animation: terminal-flicker 2s infinite alternate;
 }
 
-.terminal-input:focus {
-  outline: none;
-  border-color: #00ff00;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+@keyframes terminal-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+  }
+  4%, 19%, 23%, 54% {
+    opacity: 0.7;
+  }
 }
 
-.terminal-input::placeholder {
-  color: #006600;
-  text-shadow: none;
+.boot-sequence {
+  animation: boot-sequence 0.1s steps(2, end) infinite;
 }
 
-/* Terminal Buttons */
-.terminal-button {
-  background: transparent;
-  border: 2px solid #00ff00;
-  color: #00ff00;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-weight: bold;
-  text-shadow: 0 0 5px #00ff00;
-  transition: all 0.3s ease;
+@keyframes boot-sequence {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
 }
 
-.terminal-button:hover {
-  background: #00ff00;
-  color: #000;
-  text-shadow: none;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-}
-
-/* Terminal Error Text */
-.terminal-error {
-  color: #ff4444;
-  text-shadow: 
-    0 0 5px #ff4444,
-    0 0 10px #ff4444;
-  animation: terminal-error-flash 0.5s ease-out;
-}
-
-@keyframes terminal-error-flash {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Glitch Text Effects - Updated for Terminal */
+/* Glitch Text Effects */
 .glitch-text {
   position: relative;
   display: inline-block;
@@ -258,8 +533,6 @@
 .glitch-text-main {
   position: relative;
   z-index: 3;
-  color: #00ff00;
-  text-shadow: 0 0 10px #00ff00;
 }
 
 .glitch-text-copy {
@@ -272,12 +545,10 @@
 }
 
 .glitch-text-copy:nth-child(2) {
-  color: #00ff88;
   animation: glitch-1 0.5s infinite;
 }
 
 .glitch-text-copy:nth-child(3) {
-  color: #88ff00;
   animation: glitch-2 0.7s infinite;
 }
 
@@ -299,124 +570,22 @@
   }
 }
 
-/* Flickering Animation - Updated */
-.flickering {
-  animation: terminal-flicker 2s infinite alternate;
-}
-
-@keyframes terminal-flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    opacity: 1;
-    text-shadow: 0 0 10px #00ff00;
-  }
-  4%, 19%, 23%, 54% {
-    opacity: 0.7;
-    text-shadow: 0 0 5px #00ff00;
-  }
-}
-
-/* Terminal Box Styling */
-.terminal-box {
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #008800;
-  box-shadow: 
-    0 0 20px rgba(0, 255, 0, 0.2),
-    inset 0 0 20px rgba(0, 255, 0, 0.05);
-}
-
-/* Machine Part Animations - Updated */
-.machine-part {
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #008800;
-  color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
-}
-
-.machine-part:hover {
-  transform: translateY(-5px);
-  border-color: #00ff00;
-  box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
-  text-shadow: 0 0 10px #00ff00;
-}
-
-.machine-part.pulse-glow {
-  animation: terminal-pulse-glow 1s ease-out;
-}
-
-@keyframes terminal-pulse-glow {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
-    transform: scale(1.05);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-    transform: scale(1);
-  }
-}
-
-/* Terminal Output */
-.terminal-output {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid #008800;
-  color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
-}
-
-/* Countdown Display - Updated */
-.countdown-display {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  color: #00ff00;
-  text-shadow: 
-    0 0 10px #00ff00,
-    0 0 20px #00ff00,
-    0 0 30px #00ff00;
-}
-
-/* Fade In Animation */
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Boot Sequence Animation */
-.boot-sequence {
-  animation: boot-sequence 0.1s steps(2, end) infinite;
-}
-
-@keyframes boot-sequence {
-  0% { opacity: 1; }
-  50% { opacity: 0.8; }
-  100% { opacity: 1; }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-  .crt-monitor {
-    border-width: 10px;
+  .winxp-monitor {
+    padding: 15px 15px 40px 15px;
   }
   
-  .glitch-text {
-    font-size: 2rem !important;
+  .winxp-window {
+    width: 95%;
   }
   
-  .machine-part {
-    padding: 1rem;
+  .desktop-icons {
+    gap: 20px;
+  }
+  
+  .pixel-fairy {
+    transform: scale(0.8);
   }
 }
 
@@ -425,18 +594,10 @@
   .flickering,
   .glitch-text-copy,
   .terminal-cursor,
-  .boot-sequence {
+  .boot-sequence,
+  .fairy-fly,
+  .wing-flap,
+  .sparkle-twinkle {
     animation: none;
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .terminal-text {
-    text-shadow: none;
-  }
-  
-  .crt-screen::before {
-    display: none;
   }
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlitchText from '../components/GlitchText';
 import AudioManager from '../components/AudioManager';
+import PixelatedFairy from '../components/PixelatedFairy';
 
 const Index = () => {
   const [password, setPassword] = useState('');
@@ -42,103 +43,154 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black crt-monitor">
-      <div className="crt-screen min-h-screen">
-        {/* Main Content */}
-        <div className="relative z-20 min-h-screen flex flex-col items-center justify-center p-6">
-          <div className="text-center space-y-8 max-w-4xl w-full">
-            {/* Boot Sequence */}
-            {bootSequence && (
-              <div className="terminal-box p-6 boot-sequence">
-                <div className="terminal-text space-y-2">
-                  <div>THINKERBELL OS v2.1</div>
-                  <div>BOOTING SYSTEM...</div>
-                  <div>LOADING MAGIC PROTOCOLS...</div>
-                  <div className="terminal-cursor">█</div>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 p-8">
+      {/* Windows XP Monitor Frame */}
+      <div className="winxp-monitor mx-auto">
+        {/* Monitor Stand */}
+        <div className="monitor-stand"></div>
+        
+        {/* Monitor Screen */}
+        <div className="monitor-screen">
+          {/* Windows XP Taskbar */}
+          <div className="winxp-taskbar">
+            <div className="start-button">
+              <span className="start-text">start</span>
+            </div>
+            <div className="taskbar-items">
+              <div className="system-tray">
+                <div className="tray-icons">
+                  <span className="tray-icon">🔊</span>
+                  <span className="tray-icon">📶</span>
+                  <span className="clock">{new Date().toLocaleTimeString()}</span>
                 </div>
               </div>
-            )}
+            </div>
+          </div>
 
-            {!bootSequence && (
-              <>
-                {/* System Error Header */}
-                <div className="space-y-4">
-                  <GlitchText 
-                    text="CRITICAL SYSTEM FAILURE" 
-                    className="text-4xl md:text-6xl font-mono font-bold terminal-text"
-                  />
-                  <GlitchText 
-                    text="404: MAGIC SIGNAL LOST" 
-                    className="text-2xl md:text-3xl font-mono terminal-text-bright flickering"
-                  />
+          {/* Desktop Area */}
+          <div className="winxp-desktop">
+            {/* Desktop Icons */}
+            <div className="desktop-icons">
+              <div className="desktop-icon">
+                <div className="icon-image">💻</div>
+                <div className="icon-label">My Computer</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🗂️</div>
+                <div className="icon-label">My Documents</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🗑️</div>
+                <div className="icon-label">Recycle Bin</div>
+              </div>
+            </div>
+
+            {/* Floating Pixelated Fairy */}
+            <div className="absolute top-20 right-20 z-30">
+              <PixelatedFairy />
+            </div>
+
+            {/* Main Application Window */}
+            <div className="winxp-window">
+              {/* Window Title Bar */}
+              <div className="window-titlebar">
+                <div className="window-title">
+                  <span className="title-icon">🔒</span>
+                  System Recovery Console
                 </div>
+                <div className="window-controls">
+                  <button className="control-btn minimize">_</button>
+                  <button className="control-btn maximize">□</button>
+                  <button className="control-btn close">×</button>
+                </div>
+              </div>
 
-                {/* Description */}
-                <div className="terminal-box p-6">
-                  <div className="terminal-text text-lg leading-relaxed space-y-2">
-                    <div>&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
-                    <div>&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
-                    <div className="terminal-error font-bold">&gt; LAB CREDENTIALS REQUIRED</div>
+              {/* Window Content */}
+              <div className="window-content">
+                {/* Boot Sequence */}
+                {bootSequence && (
+                  <div className="winxp-dialog p-6 boot-sequence">
+                    <div className="dialog-content space-y-2">
+                      <div>THINKERBELL OS v2.1</div>
+                      <div>BOOTING SYSTEM...</div>
+                      <div>LOADING MAGIC PROTOCOLS...</div>
+                      <div className="terminal-cursor">█</div>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Password Form */}
-                <form onSubmit={handlePasswordSubmit} className="space-y-6">
-                  <div className="relative">
-                    <div className="flex items-center terminal-box p-4">
-                      <span className="terminal-text mr-3">&gt;</span>
-                      <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="ENTER_LAB_CREDENTIALS"
-                        className="flex-1 terminal-input bg-transparent border-none outline-none text-xl"
+                {!bootSequence && (
+                  <>
+                    {/* System Error Header */}
+                    <div className="space-y-4">
+                      <GlitchText 
+                        text="CRITICAL SYSTEM FAILURE" 
+                        className="text-3xl md:text-5xl font-bold winxp-error-text"
                       />
-                      <div className="terminal-cursor ml-2">█</div>
+                      <GlitchText 
+                        text="404: MAGIC SIGNAL LOST" 
+                        className="text-xl md:text-2xl winxp-warning-text flickering"
+                      />
                     </div>
-                    {showError && (
-                      <div className="absolute -bottom-8 left-0 terminal-error font-mono text-sm flickering">
-                        ACCESS DENIED
-                      </div>
-                    )}
-                  </div>
-                  
-                  <button
-                    id="unlock-btn"
-                    type="submit"
-                    className="terminal-button py-3 px-8 text-lg font-bold"
-                  >
-                    [UNLOCK_SYSTEM]
-                  </button>
-                </form>
 
-                {/* Coffee Easter Egg */}
-                <div className="flex justify-center pt-8">
-                  <div 
-                    onClick={handleCoffeeClick}
-                    className="cursor-pointer hover:scale-110 transition-transform duration-300"
-                  >
-                    <div className="text-6xl terminal-text">
-                      ☕
+                    {/* Description */}
+                    <div className="winxp-info-box p-4 my-6">
+                      <div className="info-content space-y-2">
+                        <div>&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
+                        <div>&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
+                        <div className="font-bold text-red-600">&gt; LAB CREDENTIALS REQUIRED</div>
+                      </div>
                     </div>
-                    {coffeeClicks >= 5 && (
-                      <div className="terminal-text-bright font-mono text-sm mt-2 flickering">
-                        CREATIVE_FUEL_DETECTED
-                      </div>
-                    )}
-                  </div>
-                </div>
 
-                {/* System Info */}
-                <div className="terminal-box p-4">
-                  <div className="terminal-text-dim text-sm font-mono space-y-1">
-                    <div>SYSTEM: THINKERBELL_WORKSTATION</div>
-                    <div>STATUS: AWAITING_INPUT</div>
-                    <div>UPTIME: {new Date().toLocaleTimeString()}</div>
-                  </div>
-                </div>
-              </>
-            )}
+                    {/* Password Form */}
+                    <form onSubmit={handlePasswordSubmit} className="space-y-6">
+                      <div className="relative">
+                        <div className="winxp-input-group">
+                          <label className="input-label">Enter Lab Credentials:</label>
+                          <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="ENTER_LAB_CREDENTIALS"
+                            className="winxp-input"
+                          />
+                        </div>
+                        {showError && (
+                          <div className="winxp-error-msg">
+                            ❌ ACCESS DENIED
+                          </div>
+                        )}
+                      </div>
+                      
+                      <button
+                        id="unlock-btn"
+                        type="submit"
+                        className="winxp-button"
+                      >
+                        Unlock System
+                      </button>
+                    </form>
+
+                    {/* Coffee Easter Egg */}
+                    <div className="flex justify-center pt-6">
+                      <div 
+                        onClick={handleCoffeeClick}
+                        className="cursor-pointer hover:scale-110 transition-transform duration-300 winxp-icon-large"
+                      >
+                        <div className="text-4xl">
+                          ☕
+                        </div>
+                        {coffeeClicks >= 5 && (
+                          <div className="text-blue-600 text-sm mt-2 animate-pulse">
+                            CREATIVE_FUEL_DETECTED
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
