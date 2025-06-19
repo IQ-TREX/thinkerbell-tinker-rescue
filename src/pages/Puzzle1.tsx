@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
 import ParticleExplosion from '../components/ParticleExplosion';
 
@@ -17,6 +17,7 @@ const Puzzle1 = () => {
   const [sequence, setSequence] = useState<string[]>([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showParticles, setShowParticles] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const navigate = useNavigate();
 
   const correctSequence = ['INPUT', 'PROCESS', 'OUTPUT', 'MEASURE'];
@@ -96,20 +97,50 @@ const Puzzle1 = () => {
         {showParticles && <ParticleExplosion />}
         
         <div className="relative z-20 max-w-6xl mx-auto p-6">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-6xl font-mono font-bold terminal-text mb-4">
-              REBUILD_THE_MACHINE
-            </h1>
-            <div className="terminal-box p-4">
-              <div className="terminal-text text-lg">
-                &gt; DRAG COMPONENTS IN CORRECT SEQUENCE
-              </div>
-              <div className="terminal-text">
-                &gt; RESTORE MEASURED_MAGIC_MACHINE
+          {/* Header with Hint Button */}
+          <div className="flex justify-between items-center mb-8">
+            <div className="text-center flex-1">
+              <h1 className="text-4xl md:text-6xl font-mono font-bold terminal-text mb-4">
+                PUZZLE 1: REBUILD_THE_MACHINE
+              </h1>
+              <div className="terminal-box p-4">
+                <div className="terminal-text text-lg">
+                  &gt; DRAG COMPONENTS IN CORRECT SEQUENCE
+                </div>
+                <div className="terminal-text">
+                  &gt; RESTORE MEASURED_MAGIC_MACHINE
+                </div>
               </div>
             </div>
+            
+            <button
+              onClick={() => setShowHint(!showHint)}
+              className="terminal-button p-3 flex items-center gap-2 hover:bg-cyan-800 transition-colors ml-4"
+              title="Toggle Hint"
+            >
+              <Lightbulb size={20} className="terminal-text-bright" />
+              <span className="font-mono">HINT</span>
+            </button>
           </div>
+
+          {/* Hint Panel */}
+          {showHint && (
+            <div className="terminal-box p-4 mb-6 border-yellow-500">
+              <div className="flex items-start gap-3">
+                <Lightbulb size={24} className="text-yellow-500 mt-1 flex-shrink-0" />
+                <div className="terminal-text">
+                  <h3 className="terminal-text-bright font-bold mb-2">💡 PUZZLE HINTS:</h3>
+                  <ul className="space-y-1 text-sm">
+                    <li>• Think about the logical flow of a creative process</li>
+                    <li>• Start with gathering ideas, then work through to measuring results</li>
+                    <li>• The correct order is: INPUT → PROCESS → OUTPUT → MEASURE</li>
+                    <li>• Drag each component from the grid into the drop zone below</li>
+                    <li>• If you make a mistake, use the reset button to try again</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Machine Parts */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
@@ -153,7 +184,7 @@ const Puzzle1 = () => {
                 <p className="terminal-text-dim font-mono">&gt; DROP COMPONENTS HERE IN CORRECT ORDER...</p>
               ) : (
                 sequence.map((item, index) => (
-                  <div key={index} className="terminal-button px-4 py-2 font-mono font-bold">
+                  <div key={index} className="terminal-button px-4 py-2 font-mono font-bold bg-cyan-800 text-cyan-100 border border-cyan-400">
                     {index + 1}. {item}
                   </div>
                 ))

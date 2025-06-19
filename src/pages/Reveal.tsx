@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Lightbulb } from 'lucide-react';
 import GlitchText from '../components/GlitchText';
 
 interface Project {
@@ -12,6 +13,7 @@ interface Project {
 const Reveal = () => {
   const [currentProject, setCurrentProject] = useState(0);
   const [showManifesto, setShowManifesto] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   const projects: Project[] = [
     {
@@ -55,16 +57,49 @@ const Reveal = () => {
       <div className="scanlines"></div>
       
       <div className="relative z-10 min-h-screen p-4">
-        {/* Header */}
-        <div className="text-center mb-8 pt-8">
-          <GlitchText 
-            text="THE MISSING TINKER" 
-            className="text-4xl md:text-6xl font-mono font-bold text-[#0055FF] mb-4"
-          />
-          <p className="text-xl font-mono text-[#00F0FF]">
-            DIGITAL CORE RESTORED • MAGIC HOUR COMMENCED
-          </p>
+        {/* Header with Hint Button */}
+        <div className="flex justify-between items-start mb-8 pt-8">
+          <div className="text-center flex-1">
+            <GlitchText 
+              text="THE MISSING TINKER" 
+              className="text-4xl md:text-6xl font-mono font-bold text-[#0055FF] mb-4"
+            />
+            <p className="text-xl font-mono text-[#00F0FF] font-bold">
+              DIGITAL CORE RESTORED • MAGIC HOUR COMMENCED
+            </p>
+          </div>
+          
+          <button
+            onClick={() => setShowHint(!showHint)}
+            className="bg-[#0055FF] hover:bg-[#00F0FF] text-black font-mono font-bold py-2 px-4 rounded flex items-center gap-2 transition-all duration-300"
+            title="About This Experience"
+          >
+            <Lightbulb size={20} />
+            <span>INFO</span>
+          </button>
         </div>
+
+        {/* Info Panel */}
+        {showHint && (
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="bg-black/90 border border-[#0055FF] p-6 rounded-lg">
+              <div className="flex items-start gap-3">
+                <Lightbulb size={24} className="text-[#00F0FF] mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-xl font-mono font-bold text-[#00F0FF] mb-3">
+                    🎉 CONGRATULATIONS!
+                  </h3>
+                  <div className="text-gray-300 font-mono space-y-2">
+                    <p>• You've successfully completed all puzzles in the Missing Tinker Kit</p>
+                    <p>• This is the final reveal showing Thinkerbell's "Measured Magic" portfolio</p>
+                    <p>• Use the navigation buttons to explore different projects</p>
+                    <p>• Click the activation button to contact Thinkerbell directly</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Success Message */}
         <div className="max-w-4xl mx-auto mb-12">
@@ -72,7 +107,7 @@ const Reveal = () => {
             <h2 className="text-2xl font-mono font-bold text-[#00F0FF] mb-4">
               CONGRATULATIONS, MAGIC MAKER!
             </h2>
-            <p className="text-lg font-mono text-gray-300 leading-relaxed">
+            <p className="text-lg font-mono text-gray-300 leading-relaxed font-medium">
               You've successfully restored the Measured Magic Machine and activated the Thinkerbell Protocol. 
               The digital tinker kit is now complete, and magic hour has begun. 
               Prepare to witness the fusion of design thinking and systematic enchantment.
@@ -100,7 +135,7 @@ const Reveal = () => {
                 <h4 className="text-xl font-mono font-bold text-[#00F0FF]">
                   {projects[currentProject].title}
                 </h4>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-gray-400 font-mono">
                   {currentProject + 1} / {projects.length}
                 </p>
               </div>
@@ -115,7 +150,7 @@ const Reveal = () => {
             
             {/* Project Description */}
             <div className="text-center mb-6">
-              <p className="text-lg font-mono text-gray-300 leading-relaxed">
+              <p className="text-lg font-mono text-gray-300 leading-relaxed font-medium">
                 {projects[currentProject].description}
               </p>
             </div>
@@ -124,10 +159,10 @@ const Reveal = () => {
             <div className="bg-gray-900 border border-gray-700 rounded-lg h-64 flex items-center justify-center">
               <div className="text-center">
                 <div className="text-4xl mb-2">🎨</div>
-                <p className="text-gray-400 font-mono">
+                <p className="text-gray-400 font-mono font-bold">
                   FIGMA PROTOTYPE PREVIEW
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-gray-500 mt-2 font-mono">
                   Interactive design would be embedded here
                 </p>
               </div>
@@ -154,15 +189,15 @@ const Reveal = () => {
                   <ul className="space-y-2 ml-4">
                     <li className="flex items-start">
                       <span className="text-[#00F0FF] mr-2">•</span>
-                      <span>Client participation in Magic Hour sessions</span>
+                      <span className="font-medium">Client participation in Magic Hour sessions</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-[#00F0FF] mr-2">•</span>
-                      <span>MMI 'Creative Friction' metrics for innovation optimization</span>
+                      <span className="font-medium">MMI 'Creative Friction' metrics for innovation optimization</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-[#00F0FF] mr-2">•</span>
-                      <span>Tinker-led Mind Expansion Projects</span>
+                      <span className="font-medium">Tinker-led Mind Expansion Projects</span>
                     </li>
                   </ul>
                 </div>
@@ -171,7 +206,7 @@ const Reveal = () => {
                   <h4 className="text-lg font-bold text-[#0055FF] mb-2">
                     THE PHILOSOPHY:
                   </h4>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed font-medium">
                     Magic without measurement is chaos. Measurement without magic is sterile. 
                     At Thinkerbell, we believe the future of design lies in the systematic 
                     application of creative forces. Every pixel placed, every interaction 
@@ -183,7 +218,7 @@ const Reveal = () => {
                 <div className="text-center py-4">
                   <a 
                     href="/manifesto.pdf" 
-                    className="text-[#00F0FF] hover:text-white underline transition-colors"
+                    className="text-[#00F0FF] hover:text-white underline transition-colors font-bold"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -208,14 +243,14 @@ const Reveal = () => {
             🚨 ACTIVATE THINKERBELL PROTOCOL
           </button>
           
-          <p className="text-sm font-mono text-gray-400 mt-4">
+          <p className="text-sm font-mono text-gray-400 mt-4 font-medium">
             This will open your email client with the activation sequence
           </p>
         </div>
 
         {/* Footer */}
         <div className="text-center py-8">
-          <p className="text-sm font-mono text-gray-500">
+          <p className="text-sm font-mono text-gray-500 font-medium">
             THINKERBELL DIGITAL TINKER KIT v4.0 • MAGIC MEASURED • IMPACT AMPLIFIED
           </p>
         </div>

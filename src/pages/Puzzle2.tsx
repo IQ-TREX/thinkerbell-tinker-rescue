@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
 
 const Puzzle2 = () => {
@@ -15,6 +16,7 @@ const Puzzle2 = () => {
   ]);
   const [showCountdown, setShowCountdown] = useState(false);
   const [countdown, setCountdown] = useState(300); // 5 minutes
+  const [showHint, setShowHint] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -78,6 +80,43 @@ const Puzzle2 = () => {
     <div className="min-h-screen bg-black crt-monitor">
       <div className="crt-screen min-h-screen p-6">
         <div className="relative z-20 max-w-4xl mx-auto">
+          {/* Puzzle Header with Hint Button */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="terminal-box p-4 flex-1 mr-4">
+              <h1 className="text-2xl font-mono font-bold terminal-text-bright mb-2">
+                PUZZLE 2: TERMINAL COMMAND CHALLENGE
+              </h1>
+              <p className="terminal-text">Find the correct command to activate the bell module</p>
+            </div>
+            
+            <button
+              onClick={() => setShowHint(!showHint)}
+              className="terminal-button p-3 flex items-center gap-2 hover:bg-cyan-800 transition-colors"
+              title="Toggle Hint"
+            >
+              <Lightbulb size={20} className="terminal-text-bright" />
+              <span className="font-mono">HINT</span>
+            </button>
+          </div>
+
+          {/* Hint Panel */}
+          {showHint && (
+            <div className="terminal-box p-4 mb-6 border-yellow-500">
+              <div className="flex items-start gap-3">
+                <Lightbulb size={24} className="text-yellow-500 mt-1 flex-shrink-0" />
+                <div className="terminal-text">
+                  <h3 className="terminal-text-bright font-bold mb-2">💡 PUZZLE HINTS:</h3>
+                  <ul className="space-y-1 text-sm">
+                    <li>• The bell needs to think - combine these two concepts</li>
+                    <li>• Look at the error message for clues about what's needed</li>
+                    <li>• Try typing a command that makes a bell "think"</li>
+                    <li>• Commands are case-insensitive</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Terminal Header */}
           <div className="terminal-box p-6 mb-6">
             <div className="flex items-center mb-4">
