@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Lightbulb } from 'lucide-react';
 import GlitchText from '../components/GlitchText';
+import NavigationHeader from '../components/NavigationHeader';
 
 interface Project {
   title: string;
@@ -52,13 +52,14 @@ const Reveal = () => {
 
   return (
     <div className="min-h-screen bg-black text-[#00F0FF] relative overflow-hidden">
+      <NavigationHeader />
       {/* VHS Overlay */}
       <div className="vhs-overlay"></div>
       <div className="scanlines"></div>
       
       <div className="relative z-10 min-h-screen p-4">
         {/* Header with Hint Button */}
-        <div className="flex justify-between items-start mb-8 pt-8">
+        <div className="flex justify-between items-start mb-8 pt-20">
           <div className="text-center flex-1">
             <GlitchText 
               text="THE MISSING TINKER" 

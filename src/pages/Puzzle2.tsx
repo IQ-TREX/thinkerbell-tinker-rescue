@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
+import NavigationHeader from '../components/NavigationHeader';
 
 const Puzzle2 = () => {
   const [input, setInput] = useState('');
@@ -78,8 +79,9 @@ const Puzzle2 = () => {
 
   return (
     <div className="min-h-screen bg-black crt-monitor">
+      <NavigationHeader />
       <div className="crt-screen min-h-screen p-6">
-        <div className="relative z-20 max-w-4xl mx-auto">
+        <div className="relative z-20 max-w-4xl mx-auto pt-16">
           {/* Puzzle Header with Hint Button */}
           <div className="flex justify-between items-center mb-6">
             <div className="terminal-box p-4 flex-1 mr-4">

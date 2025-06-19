@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
 import ParticleExplosion from '../components/ParticleExplosion';
+import NavigationHeader from '../components/NavigationHeader';
 
 interface MachinePart {
   id: string;
@@ -93,10 +94,11 @@ const Puzzle1 = () => {
 
   return (
     <div className="min-h-screen bg-black crt-monitor">
+      <NavigationHeader />
       <div className="crt-screen min-h-screen">
         {showParticles && <ParticleExplosion />}
         
-        <div className="relative z-20 max-w-6xl mx-auto p-6">
+        <div className="relative z-20 max-w-6xl mx-auto p-6 pt-20">
           {/* Header with Hint Button */}
           <div className="flex justify-between items-center mb-8">
             <div className="text-center flex-1">
