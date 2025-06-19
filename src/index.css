@@ -88,123 +88,173 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
-    background: linear-gradient(to bottom, #4a9eff, #0078d4);
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    background: #008080;
     color: #000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
 }
 
-/* Windows XP Monitor Styles */
+/* Windows 95 Monitor Styles */
 
-.winxp-monitor {
-  max-width: 1200px;
-  position: relative;
-  background: linear-gradient(145deg, #e8e8e8, #c0c0c0);
-  border-radius: 20px 20px 40px 40px;
-  padding: 30px 30px 80px 30px;
+.win95-monitor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(145deg, #c0c0c0, #808080);
+  border: none;
+  padding: 40px 40px 100px 40px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
 }
 
-.monitor-stand {
+.monitor-bezel {
   position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 60px;
-  background: linear-gradient(145deg, #d0d0d0, #a0a0a0);
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 80px;
+  background: #2c2c2c;
+  border: 4px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.2);
 }
 
 .monitor-screen {
-  width: 100%;
-  height: 700px;
-  background: #3a6ea5;
-  border: 3px solid #1e3a5f;
-  border-radius: 8px;
-  position: relative;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background: #008080;
+  border: none;
   overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
 }
 
-/* Windows XP Taskbar */
-.winxp-taskbar {
+.monitor-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  display: flex;
+  gap: 8px;
+}
+
+.monitor-control-knob {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d0d0d0, #a0a0a0);
+  border: 2px outset #c0c0c0;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.monitor-brand {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  color: #666;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: 'MS Sans Serif', sans-serif;
+}
+
+/* Windows 95 Taskbar */
+.win95-taskbar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
-  background: linear-gradient(to bottom, #245edb, #1941a5);
-  border-top: 1px solid #4a9eff;
+  height: 30px;
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #808080;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px;
+  padding: 0 2px;
   z-index: 100;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0 rgba(128, 128, 128, 0.8);
 }
 
 .start-button {
-  background: linear-gradient(to bottom, #73b446, #5a9a3a);
-  border: 1px solid #3e7b2e;
-  border-radius: 6px;
-  padding: 6px 15px;
-  color: white;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  padding: 2px 8px;
+  color: #000;
   font-weight: bold;
-  font-size: 12px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  font-family: 'MS Sans Serif', sans-serif;
   cursor: pointer;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
 }
 
-.start-button:hover {
-  background: linear-gradient(to bottom, #7bc04a, #62a540);
+.start-button:active {
+  border: 2px inset #c0c0c0;
+}
+
+.start-logo {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00, #0000ff);
+  border-radius: 2px;
 }
 
 .system-tray {
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px inset #1941a5;
-  padding: 2px 8px;
-  border-radius: 2px;
+  background: #c0c0c0;
+  border: 1px inset #c0c0c0;
+  padding: 1px 4px;
+  height: 20px;
 }
 
 .tray-icons {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: white;
-  font-size: 12px;
+  gap: 4px;
+  color: #000;
+  font-size: 10px;
+  font-family: 'MS Sans Serif', sans-serif;
 }
 
 .clock {
-  color: white;
-  font-size: 11px;
-  font-family: 'Tahoma', sans-serif;
+  color: #000;
+  font-size: 10px;
+  font-family: 'MS Sans Serif', sans-serif;
+  padding: 0 4px;
 }
 
-/* Windows XP Desktop */
-.winxp-desktop {
+/* Windows 95 Desktop */
+.win95-desktop {
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="%23245edb"/><stop offset="100%" stop-color="%231941a5"/></radialGradient></defs><rect width="100" height="100" fill="url(%23g)"/></svg>');
-  background-size: cover;
+  background: #008080;
   position: relative;
-  padding: 20px;
+  padding: 10px;
   overflow: hidden;
 }
 
 .desktop-icons {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .desktop-icon {
@@ -212,177 +262,168 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 4px;
+  width: 64px;
 }
 
 .desktop-icon:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 255, 0.2);
+  border: 1px dotted #000080;
 }
 
 .icon-image {
   font-size: 32px;
-  margin-bottom: 4px;
-  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+  margin-bottom: 2px;
+  filter: none;
 }
 
 .icon-label {
-  color: white;
-  font-size: 11px;
+  color: #ffffff;
+  font-size: 10px;
   text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  font-family: 'Tahoma', sans-serif;
+  font-family: 'MS Sans Serif', sans-serif;
+  text-shadow: 1px 1px 0 #000000;
+  line-height: 1.1;
 }
 
-/* Windows XP Window */
-.winxp-window {
+/* Windows 95 Window */
+.win95-window {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  max-width: 90%;
-  background: #ece9d8;
-  border: 2px outset #ece9d8;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  font-family: 'Tahoma', sans-serif;
+  width: 500px;
+  max-width: 80%;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  font-family: 'MS Sans Serif', sans-serif;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .window-titlebar {
-  background: linear-gradient(to bottom, #0997ff, #0053ee);
+  background: linear-gradient(to right, #000080, #000080);
   color: white;
-  padding: 6px 8px;
+  padding: 2px 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 6px 6px 0 0;
+  height: 18px;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .window-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 4px;
+  font-size: 11px;
   font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .window-controls {
   display: flex;
-  gap: 2px;
+  gap: 1px;
 }
 
 .control-btn {
-  width: 21px;
-  height: 21px;
-  background: linear-gradient(to bottom, #e8e5f0, #d6d0df);
-  border: 1px outset #d6d0df;
-  font-size: 12px;
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  font-size: 8px;
   font-weight: bold;
   color: #000;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'MS Sans Serif', sans-serif;
 }
 
-.control-btn:hover {
-  background: linear-gradient(to bottom, #f0edf5, #e0dae8);
-}
-
-.control-btn.close {
-  background: linear-gradient(to bottom, #ff6b6b, #ff5252);
-  color: white;
+.control-btn:active {
+  border: 1px inset #c0c0c0;
 }
 
 .window-content {
-  padding: 20px;
-  background: #ece9d8;
-  min-height: 400px;
-  border-radius: 0 0 6px 6px;
+  padding: 8px;
+  background: #c0c0c0;
+  min-height: 300px;
 }
 
-/* Windows XP UI Elements */
-.winxp-button {
-  background: linear-gradient(to bottom, #e8e5f0, #d6d0df);
-  border: 1px outset #d6d0df;
+/* Windows 95 UI Elements */
+.win95-button {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
   color: #000;
-  padding: 6px 16px;
-  font-size: 12px;
-  font-family: 'Tahoma', sans-serif;
-  border-radius: 3px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-family: 'MS Sans Serif', sans-serif;
   cursor: pointer;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.winxp-button:hover {
-  background: linear-gradient(to bottom, #f0edf5, #e0dae8);
+.win95-button:hover {
+  background: #d4d0c8;
 }
 
-.winxp-button:active {
-  border: 1px inset #d6d0df;
-  background: linear-gradient(to bottom, #d6d0df, #e8e5f0);
+.win95-button:active {
+  border: 2px inset #c0c0c0;
 }
 
-.winxp-input {
+.win95-input {
   background: white;
-  border: 2px inset #d4d0c8;
-  padding: 4px 6px;
-  font-size: 12px;
-  font-family: 'Tahoma', sans-serif;
+  border: 2px inset #c0c0c0;
+  padding: 2px 4px;
+  font-size: 11px;
+  font-family: 'MS Sans Serif', sans-serif;
   width: 100%;
 }
 
-.winxp-input:focus {
+.win95-input:focus {
   outline: none;
-  border: 2px inset #316ac5;
 }
 
-.winxp-input-group {
-  margin-bottom: 12px;
+.win95-input-group {
+  margin-bottom: 8px;
 }
 
 .input-label {
   display: block;
-  margin-bottom: 4px;
-  font-size: 12px;
-  color: #000;
-  font-family: 'Tahoma', sans-serif;
-}
-
-.winxp-dialog {
-  background: #ece9d8;
-  border: 2px outset #ece9d8;
-  padding: 16px;
-  margin: 16px 0;
-  border-radius: 4px;
-}
-
-.winxp-info-box {
-  background: #f0f0f0;
-  border: 1px inset #d4d0c8;
-  border-radius: 4px;
-}
-
-.winxp-error-text {
-  color: #c00;
-  font-family: 'Tahoma', sans-serif;
-  font-weight: bold;
-}
-
-.winxp-warning-text {
-  color: #ff8c00;
-  font-family: 'Tahoma', sans-serif;
-  font-weight: bold;
-}
-
-.winxp-error-msg {
-  color: #c00;
+  margin-bottom: 2px;
   font-size: 11px;
-  margin-top: 4px;
-  font-family: 'Tahoma', sans-serif;
+  color: #000;
+  font-family: 'MS Sans Serif', sans-serif;
+}
+
+.win95-dialog {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.win95-info-box {
+  background: #ffffff;
+  border: 2px inset #c0c0c0;
+  padding: 4px;
+}
+
+.win95-error-text {
+  color: #800000;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-weight: bold;
+}
+
+.win95-warning-text {
+  color: #800080;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-weight: bold;
+}
+
+.win95-error-msg {
+  color: #800000;
+  font-size: 10px;
+  margin-top: 2px;
+  font-family: 'MS Sans Serif', sans-serif;
 }
 
 /* Pixelated Fairy Styles */
@@ -572,16 +613,16 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .winxp-monitor {
-    padding: 15px 15px 40px 15px;
+  .win95-monitor {
+    padding: 20px 20px 60px 20px;
   }
   
-  .winxp-window {
+  .win95-window {
     width: 95%;
   }
   
   .desktop-icons {
-    gap: 20px;
+    gap: 15px;
   }
   
   .pixel-fairy {

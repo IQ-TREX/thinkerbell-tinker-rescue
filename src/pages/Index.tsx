@@ -43,32 +43,28 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 p-8">
-      {/* Windows XP Monitor Frame */}
-      <div className="winxp-monitor mx-auto">
-        {/* Monitor Stand */}
-        <div className="monitor-stand"></div>
-        
+    <div className="win95-monitor">
+      {/* Monitor Bezel */}
+      <div className="monitor-bezel">
         {/* Monitor Screen */}
         <div className="monitor-screen">
-          {/* Windows XP Taskbar */}
-          <div className="winxp-taskbar">
+          {/* Windows 95 Taskbar */}
+          <div className="win95-taskbar">
             <div className="start-button">
-              <span className="start-text">start</span>
+              <div className="start-logo"></div>
+              <span>Start</span>
             </div>
-            <div className="taskbar-items">
-              <div className="system-tray">
-                <div className="tray-icons">
-                  <span className="tray-icon">🔊</span>
-                  <span className="tray-icon">📶</span>
-                  <span className="clock">{new Date().toLocaleTimeString()}</span>
-                </div>
+            <div className="system-tray">
+              <div className="tray-icons">
+                <span>🔊</span>
+                <span>📶</span>
               </div>
+              <div className="clock">{new Date().toLocaleTimeString().slice(0, 5)}</div>
             </div>
           </div>
 
           {/* Desktop Area */}
-          <div className="winxp-desktop">
+          <div className="win95-desktop">
             {/* Desktop Icons */}
             <div className="desktop-icons">
               <div className="desktop-icon">
@@ -76,22 +72,26 @@ const Index = () => {
                 <div className="icon-label">My Computer</div>
               </div>
               <div className="desktop-icon">
-                <div className="icon-image">🗂️</div>
+                <div className="icon-image">📁</div>
                 <div className="icon-label">My Documents</div>
               </div>
               <div className="desktop-icon">
                 <div className="icon-image">🗑️</div>
                 <div className="icon-label">Recycle Bin</div>
               </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🌐</div>
+                <div className="icon-label">Network Neighborhood</div>
+              </div>
             </div>
 
             {/* Floating Pixelated Fairy */}
-            <div className="absolute top-20 right-20 z-30">
+            <div className="absolute top-16 right-16 z-30">
               <PixelatedFairy />
             </div>
 
             {/* Main Application Window */}
-            <div className="winxp-window">
+            <div className="win95-window">
               {/* Window Title Bar */}
               <div className="window-titlebar">
                 <div className="window-title">
@@ -99,9 +99,9 @@ const Index = () => {
                   System Recovery Console
                 </div>
                 <div className="window-controls">
-                  <button className="control-btn minimize">_</button>
-                  <button className="control-btn maximize">□</button>
-                  <button className="control-btn close">×</button>
+                  <button className="control-btn">_</button>
+                  <button className="control-btn">□</button>
+                  <button className="control-btn">×</button>
                 </div>
               </div>
 
@@ -109,8 +109,8 @@ const Index = () => {
               <div className="window-content">
                 {/* Boot Sequence */}
                 {bootSequence && (
-                  <div className="winxp-dialog p-6 boot-sequence">
-                    <div className="dialog-content space-y-2">
+                  <div className="win95-dialog boot-sequence">
+                    <div className="space-y-1 text-xs">
                       <div>THINKERBELL OS v2.1</div>
                       <div>BOOTING SYSTEM...</div>
                       <div>LOADING MAGIC PROTOCOLS...</div>
@@ -122,41 +122,41 @@ const Index = () => {
                 {!bootSequence && (
                   <>
                     {/* System Error Header */}
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <GlitchText 
                         text="CRITICAL SYSTEM FAILURE" 
-                        className="text-3xl md:text-5xl font-bold winxp-error-text"
+                        className="text-2xl font-bold win95-error-text"
                       />
                       <GlitchText 
                         text="404: MAGIC SIGNAL LOST" 
-                        className="text-xl md:text-2xl winxp-warning-text flickering"
+                        className="text-lg win95-warning-text flickering"
                       />
                     </div>
 
                     {/* Description */}
-                    <div className="winxp-info-box p-4 my-6">
-                      <div className="info-content space-y-2">
+                    <div className="win95-info-box my-4">
+                      <div className="space-y-1 text-xs">
                         <div>&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
                         <div>&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
-                        <div className="font-bold text-red-600">&gt; LAB CREDENTIALS REQUIRED</div>
+                        <div className="font-bold text-red-800">&gt; LAB CREDENTIALS REQUIRED</div>
                       </div>
                     </div>
 
                     {/* Password Form */}
-                    <form onSubmit={handlePasswordSubmit} className="space-y-6">
+                    <form onSubmit={handlePasswordSubmit} className="space-y-4">
                       <div className="relative">
-                        <div className="winxp-input-group">
+                        <div className="win95-input-group">
                           <label className="input-label">Enter Lab Credentials:</label>
                           <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="ENTER_LAB_CREDENTIALS"
-                            className="winxp-input"
+                            className="win95-input"
                           />
                         </div>
                         {showError && (
-                          <div className="winxp-error-msg">
+                          <div className="win95-error-msg">
                             ❌ ACCESS DENIED
                           </div>
                         )}
@@ -165,23 +165,23 @@ const Index = () => {
                       <button
                         id="unlock-btn"
                         type="submit"
-                        className="winxp-button"
+                        className="win95-button"
                       >
                         Unlock System
                       </button>
                     </form>
 
                     {/* Coffee Easter Egg */}
-                    <div className="flex justify-center pt-6">
+                    <div className="flex justify-center pt-4">
                       <div 
                         onClick={handleCoffeeClick}
-                        className="cursor-pointer hover:scale-110 transition-transform duration-300 winxp-icon-large"
+                        className="cursor-pointer hover:bg-blue-200 p-2 transition-colors duration-300"
                       >
-                        <div className="text-4xl">
+                        <div className="text-2xl">
                           ☕
                         </div>
                         {coffeeClicks >= 5 && (
-                          <div className="text-blue-600 text-sm mt-2 animate-pulse">
+                          <div className="text-blue-800 text-xs mt-1">
                             CREATIVE_FUEL_DETECTED
                           </div>
                         )}
@@ -193,6 +193,17 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Monitor Controls */}
+      <div className="monitor-controls">
+        <div className="monitor-control-knob"></div>
+        <div className="monitor-control-knob"></div>
+      </div>
+
+      {/* Monitor Brand */}
+      <div className="monitor-brand">
+        THINKERBELL CRT-95
       </div>
     </div>
   );
