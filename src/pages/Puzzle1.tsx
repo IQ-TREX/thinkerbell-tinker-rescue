@@ -29,24 +29,42 @@ const Puzzle1 = () => {
   ];
 
   const handleDragStart = (e: React.DragEvent, partType: string) => {
+    console.log('Drag started for:', partType);
     setDraggedItem(partType);
     e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', partType);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     e.dataTransfer.dropEffect = 'move';
+    console.log('Drag over drop zone');
+  };
+
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Drag enter drop zone');
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    if (draggedItem && !sequence.includes(draggedItem)) {
-      const newSequence = [...sequence, draggedItem];
+    e.stopPropagation();
+    console.log('Drop event triggered');
+    
+    const droppedType = e.dataTransfer.getData('text/plain') || draggedItem;
+    console.log('Dropped item:', droppedType);
+    
+    if (droppedType && !sequence.includes(droppedType)) {
+      const newSequence = [...sequence, droppedType];
       setSequence(newSequence);
+      console.log('New sequence:', newSequence);
       
       // Check if sequence is correct
       if (newSequence.length === correctSequence.length) {
         const isCorrect = newSequence.every((item, index) => item === correctSequence[index]);
+        console.log('Sequence complete. Is correct:', isCorrect);
         if (isCorrect) {
           setShowSuccess(true);
           setShowParticles(true);
@@ -69,6 +87,7 @@ const Puzzle1 = () => {
     setSequence([]);
     setShowSuccess(false);
     setShowParticles(false);
+    console.log('Sequence reset');
   };
 
   return (
@@ -97,11 +116,17 @@ const Puzzle1 = () => {
             {machineParts.map((part) => (
               <div
                 key={part.id}
-                draggable
+                draggable={!sequence.includes(part.type)}
                 onDragStart={(e) => handleDragStart(e, part.type)}
                 className={`machine-part p-6 rounded cursor-move transition-all duration-300 ${
-                  sequence.includes(part.type) ? 'opacity-50 cursor-not-allowed' : ''
+                  sequence.includes(part.type) 
+                    ? 'opacity-50 cursor-not-allowed' 
+                    : 'hover:scale-105 cursor-grab active:cursor-grabbing'
                 }`}
+                style={{
+                  userSelect: 'none',
+                  touchAction: 'none'
+                }}
               >
                 <div className="text-center">
                   <div className="text-4xl mb-2 terminal-text">{part.icon}</div>
@@ -116,8 +141,9 @@ const Puzzle1 = () => {
           {/* Drop Zone */}
           <div
             onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
             onDrop={handleDrop}
-            className="terminal-box p-8 min-h-32 mb-6 border-dashed"
+            className="terminal-box p-8 min-h-32 mb-6 border-dashed border-2 border-cyan-400 hover:border-cyan-300 transition-colors"
           >
             <h3 className="text-xl font-mono font-bold terminal-text-bright mb-4 text-center">
               MACHINE_SEQUENCE
@@ -158,6 +184,15 @@ const Puzzle1 = () => {
             <div className="terminal-box p-3">
               <div className="text-sm font-mono terminal-text-dim">
                 PUZZLE_1_OF_2 | SEQUENCE: {sequence.length}/{correctSequence.length}
+              </div>
+            </div>
+          </div>
+
+          {/* Debug Info */}
+          <div className="mt-4 text-center">
+            <div className="terminal-box p-2">
+              <div className="text-xs font-mono terminal-text-dim">
+                DEBUG: Current sequence [{sequence.join(', ')}] | Target: [{correctSequence.join(', ')}]
               </div>
             </div>
           </div>
