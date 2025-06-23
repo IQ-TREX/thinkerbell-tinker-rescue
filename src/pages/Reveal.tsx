@@ -59,8 +59,8 @@ const Reveal = () => {
     <div className="win95-monitor">
       {/* Monitor Bezel */}
       <div className="monitor-bezel">
-        {/* Monitor Screen */}
-        <div className="monitor-screen">
+        {/* Monitor Screen with proper padding */}
+        <div className="monitor-screen p-4">
           {/* Windows 95 Taskbar */}
           <div className="win95-taskbar">
             <div className="start-button">
@@ -94,16 +94,16 @@ const Reveal = () => {
               </div>
             </div>
 
-            {/* Content Area with Proper Boundaries */}
-            <div className="absolute inset-4 top-8 bottom-8 overflow-hidden">
-              {/* Floating Pixelated Fairy - Repositioned */}
-              <div className="absolute top-4 right-4 z-20">
+            {/* Content Area with safe boundaries */}
+            <div className="relative w-full h-full overflow-hidden">
+              {/* Floating Pixelated Fairy - Safe positioning */}
+              <div className="absolute top-2 right-2 z-50">
                 <PixelatedFairy />
               </div>
 
               {/* Success Dialog - Repositioned with safe margins */}
-              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30">
-                <div className="win95-window" style={{ width: '320px' }}>
+              <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-40 max-w-xs sm:max-w-sm">
+                <div className="win95-window">
                   <div className="window-titlebar">
                     <div className="window-title">
                       <span className="title-icon">🔔</span>
@@ -130,9 +130,9 @@ const Reveal = () => {
                 </div>
               </div>
 
-              {/* Main Portfolio Window - Repositioned to center with proper spacing */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16 z-10">
-                <div className="win95-window" style={{ width: '580px', maxWidth: '90%' }}>
+              {/* Main Portfolio Window - Better positioned to avoid overlap */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-20 z-30 w-full max-w-lg px-4">
+                <div className="win95-window">
                   {/* Window Title Bar */}
                   <div className="window-titlebar">
                     <div className="window-title">
