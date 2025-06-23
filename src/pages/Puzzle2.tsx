@@ -3,20 +3,20 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
-import NavigationHeader from '../components/NavigationHeader';
+import PixelatedFairy from '../components/PixelatedFairy';
 
 const Puzzle2 = () => {
   const [input, setInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState<string[]>([
-    '> THINKERBELL PROTOCOL v7.3',
-    '> INITIALIZING MAGIC HOUR SEQUENCE...',
-    '> ERROR: BELL MODULE OFFLINE',
-    '> ACTION REQUIRED: ACTIVATE_MAGIC_HOUR_SEQUENCE',
-    '> SYSTEM PROMPT: RING_WHEN_MAGIC_HOUR_NEARS',
-    '> type_command_here'
+    '>> THINKERBELL PROTOCOL v7.3',
+    '>> INITIALIZING MAGIC HOUR SEQUENCE...',
+    '>> ERROR: BELL MODULE OFFLINE',
+    '>> ACTION REQUIRED: ACTIVATE_MAGIC_HOUR_SEQUENCE',
+    '>> SYSTEM PROMPT: RING_WHEN_MAGIC_HOUR_NEARS',
+    '>> type_command_here'
   ]);
   const [showCountdown, setShowCountdown] = useState(false);
-  const [countdown, setCountdown] = useState(300); // 5 minutes
+  const [countdown, setCountdown] = useState(300);
   const [showHint, setShowHint] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,15 +25,15 @@ const Puzzle2 = () => {
     e.preventDefault();
     const command = input.toLowerCase().trim();
     
-    setTerminalHistory(prev => [...prev, `> ${input}`]);
+    setTerminalHistory(prev => [...prev, `>> ${input}`]);
     
     if (command === 'bellthink') {
       setTerminalHistory(prev => [
         ...prev,
-        '> COMMAND ACCEPTED',
-        '> BELL MODULE: ACTIVATING...',
-        '> MAGIC HOUR SEQUENCE: INITIATED',
-        '> COUNTDOWN TO MAGIC HOUR: STARTING'
+        '>> COMMAND ACCEPTED',
+        '>> BELL MODULE: ACTIVATING...',
+        '>> MAGIC HOUR SEQUENCE: INITIATED',
+        '>> COUNTDOWN TO MAGIC HOUR: STARTING'
       ]);
       
       AudioManager.playBellChime();
@@ -45,8 +45,8 @@ const Puzzle2 = () => {
     } else {
       setTerminalHistory(prev => [
         ...prev,
-        '> COMMAND NOT RECOGNIZED',
-        '> HINT: THE BELL NEEDS TO THINK...'
+        '>> COMMAND NOT RECOGNIZED',
+        '>> HINT: THE BELL NEEDS TO THINK...'
       ]);
       AudioManager.playError();
     }
@@ -54,7 +54,6 @@ const Puzzle2 = () => {
     setInput('');
   };
 
-  // Countdown timer
   useEffect(() => {
     if (showCountdown && countdown > 0) {
       const timer = setInterval(() => {
@@ -64,7 +63,6 @@ const Puzzle2 = () => {
     }
   }, [showCountdown, countdown]);
 
-  // Auto-focus input
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -78,128 +76,163 @@ const Puzzle2 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black crt-monitor">
-      <NavigationHeader />
-      <div className="crt-screen min-h-screen p-6">
-        <div className="relative z-20 max-w-4xl mx-auto pt-16">
-          {/* Puzzle Header with Hint Button */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="terminal-box p-4 flex-1 mr-4">
-              <h1 className="text-2xl font-mono font-bold terminal-text-bright mb-2">
-                PUZZLE 2: TERMINAL COMMAND CHALLENGE
-              </h1>
-              <p className="terminal-text">Find the correct command to activate the bell module</p>
+    <div className="win95-monitor">
+      {/* Monitor Bezel */}
+      <div className="monitor-bezel">
+        {/* Monitor Screen */}
+        <div className="monitor-screen">
+          {/* Windows 95 Taskbar */}
+          <div className="win95-taskbar">
+            <div className="start-button">
+              <div className="start-logo"></div>
+              <span>Start</span>
             </div>
-            
-            <button
-              onClick={() => setShowHint(!showHint)}
-              className="terminal-button p-3 flex items-center gap-2 hover:bg-cyan-800 transition-colors"
-              title="Toggle Hint"
-            >
-              <Lightbulb size={20} className="terminal-text-bright" />
-              <span className="font-mono">HINT</span>
-            </button>
+            <div className="system-tray">
+              <div className="tray-icons">
+                <span>🔊</span>
+                <span>📶</span>
+              </div>
+              <div className="clock">{new Date().toLocaleTimeString().slice(0, 5)}</div>
+            </div>
           </div>
 
-          {/* Hint Panel */}
-          {showHint && (
-            <div className="terminal-box p-4 mb-6 border-yellow-500">
-              <div className="flex items-start gap-3">
-                <Lightbulb size={24} className="text-yellow-500 mt-1 flex-shrink-0" />
-                <div className="terminal-text">
-                  <h3 className="terminal-text-bright font-bold mb-2">💡 PUZZLE HINTS:</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>• The bell needs to think - combine these two concepts</li>
-                    <li>• Look at the error message for clues about what's needed</li>
-                    <li>• Try typing a command that makes a bell "think"</li>
-                    <li>• Commands are case-insensitive</li>
-                  </ul>
+          {/* Desktop Area */}
+          <div className="win95-desktop">
+            {/* Desktop Icons */}
+            <div className="desktop-icons">
+              <div className="desktop-icon">
+                <div className="icon-image">💻</div>
+                <div className="icon-label">My Computer</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">📁</div>
+                <div className="icon-label">My Documents</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🗑️</div>
+                <div className="icon-label">Recycle Bin</div>
+              </div>
+            </div>
+
+            {/* Floating Pixelated Fairy */}
+            <div className="absolute top-16 right-16 z-30">
+              <PixelatedFairy />
+            </div>
+
+            {/* Main Terminal Window */}
+            <div className="win95-window">
+              {/* Window Title Bar */}
+              <div className="window-titlebar">
+                <div className="window-title">
+                  <span className="title-icon">💻</span>
+                  Terminal
+                </div>
+                <div className="window-controls">
+                  <button className="control-btn">_</button>
+                  <button className="control-btn">□</button>
+                  <button className="control-btn">×</button>
                 </div>
               </div>
-            </div>
-          )}
 
-          {/* Terminal Header */}
-          <div className="terminal-box p-6 mb-6">
-            <div className="flex items-center mb-4">
-              <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-sm terminal-text-dim ml-4">THINKERBELL_TERMINAL.exe</span>
-            </div>
-            
-            {/* Terminal Output */}
-            <div className="terminal-output space-y-2 mb-6 h-96 overflow-y-auto p-4">
-              {terminalHistory.map((line, index) => (
-                <div 
-                  key={index} 
-                  className={`font-mono ${
-                    line.includes('ERROR') ? 'terminal-error flickering' : 
-                    line.includes('COMMAND ACCEPTED') || line.includes('ACTIVATED') ? 'terminal-text-bright' :
-                    'terminal-text'
-                  }`}
-                >
-                  {line}
+              {/* Window Content */}
+              <div className="window-content">
+                {/* Terminal Header Info */}
+                <div className="win95-info-box mb-4">
+                  <div className="space-y-1 text-xs">
+                    <div>&gt;&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
+                    <div>&gt;&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
+                    <div className="font-bold text-red-800">&gt;&gt; LAB CREDENTIALS REQUIRED</div>
+                    <div>&gt;&gt; Enter Lab Credentials:</div>
+                  </div>
                 </div>
-              ))}
-              <div className="terminal-cursor">█</div>
-            </div>
-            
-            {/* Input */}
-            <form onSubmit={handleSubmit} className="flex items-center terminal-box p-3">
-              <span className="terminal-text-bright mr-2">&gt;</span>
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="type_command_here"
-                className="flex-1 terminal-input bg-transparent border-none outline-none"
-                autoComplete="off"
-              />
-              <div className="terminal-cursor ml-1">█</div>
-            </form>
-          </div>
 
-          {/* Magic Hour Countdown */}
-          {showCountdown && (
-            <div className="terminal-box p-6 text-center mb-6">
-              <h2 className="text-2xl font-bold terminal-text-bright mb-4">
-                MAGIC_HOUR_ACTIVATED
-              </h2>
-              <div className="text-6xl font-bold countdown-display mb-4">
-                {formatTime(countdown)}
-              </div>
-              <p className="text-lg terminal-text">
-                &gt; THE BELL RESONATES... MAGIC HOUR APPROACHES...
-              </p>
-            </div>
-          )}
+                {/* Hint Button */}
+                <div className="flex justify-end mb-4">
+                  <button
+                    onClick={() => setShowHint(!showHint)}
+                    className="win95-button text-xs flex items-center gap-1"
+                  >
+                    <Lightbulb size={12} />
+                    HINT
+                  </button>
+                </div>
 
-          {/* Help Section */}
-          <div className="terminal-box p-4 mb-6">
-            <details>
-              <summary className="terminal-text-bright cursor-pointer hover:text-shadow transition-colors font-mono">
-                [SYSTEM_HELP]
-              </summary>
-              <div className="mt-4 space-y-2 terminal-text-dim font-mono">
-                <div>&gt; Available commands: Unknown - discover through experimentation</div>
-                <div>&gt; Hint: What makes a bell think?</div>
-                <div>&gt; Case sensitivity: Disabled for user convenience</div>
-                <div>&gt; Emergency protocol: Contact system administrator</div>
-              </div>
-            </details>
-          </div>
+                {/* Hint Panel */}
+                {showHint && (
+                  <div className="win95-dialog mb-4">
+                    <div className="text-xs space-y-1">
+                      <div className="font-bold">💡 TERMINAL HINTS:</div>
+                      <div>• The bell needs to think - combine these concepts</div>
+                      <div>• Look at the error for clues about what's needed</div>
+                      <div>• Try a command that makes a bell "think"</div>
+                      <div>• Commands are case-insensitive</div>
+                    </div>
+                  </div>
+                )}
 
-          {/* Progress */}
-          <div className="text-center">
-            <div className="terminal-box p-3">
-              <div className="text-sm terminal-text-dim font-mono">
-                PUZZLE_2_OF_2 | STATUS: {showCountdown ? 'MAGIC_HOUR_INITIATED' : 'AWAITING_COMMAND'}
+                {/* Terminal Output */}
+                <div className="bg-black text-green-400 p-4 h-48 overflow-y-auto font-mono text-xs mb-4 border-2 inset">
+                  {terminalHistory.map((line, index) => (
+                    <div 
+                      key={index} 
+                      className={
+                        line.includes('ERROR') ? 'text-red-400 flickering' : 
+                        line.includes('ACCEPTED') || line.includes('ACTIVATED') ? 'text-white font-bold' :
+                        'text-green-400'
+                      }
+                    >
+                      {line}
+                    </div>
+                  ))}
+                  <div className="terminal-cursor">█</div>
+                </div>
+                
+                {/* Input */}
+                <form onSubmit={handleSubmit} className="mb-4">
+                  <div className="flex items-center">
+                    <span className="text-xs mr-2">&gt;&gt;</span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="type_command_here"
+                      className="win95-input flex-1 text-xs"
+                      autoComplete="off"
+                    />
+                  </div>
+                </form>
+
+                {/* Magic Hour Countdown */}
+                {showCountdown && (
+                  <div className="win95-dialog text-center mb-4">
+                    <div className="text-xs font-bold mb-2">MAGIC_HOUR_ACTIVATED</div>
+                    <div className="text-2xl font-bold mb-2">{formatTime(countdown)}</div>
+                    <div className="text-xs">&gt;&gt; THE BELL RESONATES... MAGIC HOUR APPROACHES...</div>
+                  </div>
+                )}
+
+                {/* Status */}
+                <div className="win95-info-box">
+                  <div className="text-xs">
+                    STATUS: PUZZLE_2_OF_2 | {showCountdown ? 'MAGIC_HOUR_INITIATED' : 'AWAITING_COMMAND'}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Monitor Controls */}
+      <div className="monitor-controls">
+        <div className="monitor-control-knob"></div>
+        <div className="monitor-control-knob"></div>
+      </div>
+
+      {/* Monitor Brand */}
+      <div className="monitor-brand">
+        THINKERBELL CRT-95
       </div>
     </div>
   );

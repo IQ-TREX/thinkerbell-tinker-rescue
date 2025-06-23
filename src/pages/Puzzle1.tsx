@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lightbulb } from 'lucide-react';
 import AudioManager from '../components/AudioManager';
 import ParticleExplosion from '../components/ParticleExplosion';
-import NavigationHeader from '../components/NavigationHeader';
+import PixelatedFairy from '../components/PixelatedFairy';
 
 interface MachinePart {
   id: string;
@@ -41,13 +42,11 @@ const Puzzle1 = () => {
     e.preventDefault();
     e.stopPropagation();
     e.dataTransfer.dropEffect = 'move';
-    console.log('Drag over drop zone');
   };
 
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Drag enter drop zone');
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -92,144 +91,188 @@ const Puzzle1 = () => {
     console.log('Sequence reset');
   };
 
+  useEffect(() => {
+    AudioManager.startBackgroundMusic();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black crt-monitor">
-      <NavigationHeader />
-      <div className="crt-screen min-h-screen">
-        {showParticles && <ParticleExplosion />}
-        
-        <div className="relative z-20 max-w-6xl mx-auto p-6 pt-20">
-          {/* Header with Hint Button */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="text-center flex-1">
-              <h1 className="text-4xl md:text-6xl font-mono font-bold terminal-text mb-4">
-                PUZZLE 1: REBUILD_THE_MACHINE
-              </h1>
-              <div className="terminal-box p-4">
-                <div className="terminal-text text-lg">
-                  &gt; DRAG COMPONENTS IN CORRECT SEQUENCE
-                </div>
-                <div className="terminal-text">
-                  &gt; RESTORE MEASURED_MAGIC_MACHINE
-                </div>
-              </div>
+    <div className="win95-monitor">
+      {showParticles && <ParticleExplosion />}
+      
+      {/* Monitor Bezel */}
+      <div className="monitor-bezel">
+        {/* Monitor Screen */}
+        <div className="monitor-screen">
+          {/* Windows 95 Taskbar */}
+          <div className="win95-taskbar">
+            <div className="start-button">
+              <div className="start-logo"></div>
+              <span>Start</span>
             </div>
-            
-            <button
-              onClick={() => setShowHint(!showHint)}
-              className="terminal-button p-3 flex items-center gap-2 hover:bg-cyan-800 transition-colors ml-4"
-              title="Toggle Hint"
-            >
-              <Lightbulb size={20} className="terminal-text-bright" />
-              <span className="font-mono">HINT</span>
-            </button>
+            <div className="system-tray">
+              <div className="tray-icons">
+                <span>🔊</span>
+                <span>📶</span>
+              </div>
+              <div className="clock">{new Date().toLocaleTimeString().slice(0, 5)}</div>
+            </div>
           </div>
 
-          {/* Hint Panel */}
-          {showHint && (
-            <div className="terminal-box p-4 mb-6 border-yellow-500">
-              <div className="flex items-start gap-3">
-                <Lightbulb size={24} className="text-yellow-500 mt-1 flex-shrink-0" />
-                <div className="terminal-text">
-                  <h3 className="terminal-text-bright font-bold mb-2">💡 PUZZLE HINTS:</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>• Think about the logical flow of a creative process</li>
-                    <li>• Start with gathering ideas, then work through to measuring results</li>
-                    <li>• The correct order is: INPUT → PROCESS → OUTPUT → MEASURE</li>
-                    <li>• Drag each component from the grid into the drop zone below</li>
-                    <li>• If you make a mistake, use the reset button to try again</li>
-                  </ul>
-                </div>
+          {/* Desktop Area */}
+          <div className="win95-desktop">
+            {/* Desktop Icons */}
+            <div className="desktop-icons">
+              <div className="desktop-icon">
+                <div className="icon-image">💻</div>
+                <div className="icon-label">My Computer</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">📁</div>
+                <div className="icon-label">My Documents</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🗑️</div>
+                <div className="icon-label">Recycle Bin</div>
               </div>
             </div>
-          )}
 
-          {/* Machine Parts */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            {machineParts.map((part) => (
-              <div
-                key={part.id}
-                draggable={!sequence.includes(part.type)}
-                onDragStart={(e) => handleDragStart(e, part.type)}
-                className={`machine-part p-6 rounded cursor-move transition-all duration-300 ${
-                  sequence.includes(part.type) 
-                    ? 'opacity-50 cursor-not-allowed' 
-                    : 'hover:scale-105 cursor-grab active:cursor-grabbing'
-                }`}
-                style={{
-                  userSelect: 'none',
-                  touchAction: 'none'
-                }}
-              >
-                <div className="text-center">
-                  <div className="text-4xl mb-2 terminal-text">{part.icon}</div>
-                  <h3 className="text-xl font-mono font-bold terminal-text-bright mb-1">{part.type}</h3>
-                  <p className="text-sm font-mono terminal-text mb-2">{part.name}</p>
-                  <p className="text-xs terminal-text-dim">{part.description}</p>
+            {/* Floating Pixelated Fairy */}
+            <div className="absolute top-16 right-16 z-30">
+              <PixelatedFairy />
+            </div>
+
+            {/* Main Terminal Window */}
+            <div className="win95-window">
+              {/* Window Title Bar */}
+              <div className="window-titlebar">
+                <div className="window-title">
+                  <span className="title-icon">🔧</span>
+                  Puzzle #1 - Machine Assembly
+                </div>
+                <div className="window-controls">
+                  <button className="control-btn">_</button>
+                  <button className="control-btn">□</button>
+                  <button className="control-btn">×</button>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Drop Zone */}
-          <div
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDrop={handleDrop}
-            className="terminal-box p-8 min-h-32 mb-6 border-dashed border-2 border-cyan-400 hover:border-cyan-300 transition-colors"
-          >
-            <h3 className="text-xl font-mono font-bold terminal-text-bright mb-4 text-center">
-              MACHINE_SEQUENCE
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {sequence.length === 0 ? (
-                <p className="terminal-text-dim font-mono">&gt; DROP COMPONENTS HERE IN CORRECT ORDER...</p>
-              ) : (
-                sequence.map((item, index) => (
-                  <div key={index} className="terminal-button px-4 py-2 font-mono font-bold bg-cyan-800 text-cyan-100 border border-cyan-400">
-                    {index + 1}. {item}
+              {/* Window Content */}
+              <div className="window-content">
+                {/* Terminal Header */}
+                <div className="win95-info-box mb-4">
+                  <div className="space-y-1 text-xs">
+                    <div>&gt;&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
+                    <div>&gt;&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
+                    <div className="font-bold text-red-800">&gt;&gt; REBUILD REQUIRED - DRAG COMPONENTS IN ORDER</div>
+                    <div>&gt;&gt; Enter Sequence: INPUT → PROCESS → OUTPUT → MEASURE</div>
                   </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          {/* Controls */}
-          <div className="text-center space-y-4">
-            <button
-              onClick={resetSequence}
-              className="terminal-button py-2 px-6 font-mono font-bold"
-            >
-              [RESET_SEQUENCE]
-            </button>
-            
-            {showSuccess && (
-              <div className="terminal-box p-4">
-                <div className="text-2xl font-mono font-bold terminal-text-bright flickering">
-                  &gt; MACHINE RESTORED! PROCEEDING TO NEXT PHASE...
                 </div>
-              </div>
-            )}
-          </div>
 
-          {/* Progress Indicator */}
-          <div className="mt-8 text-center">
-            <div className="terminal-box p-3">
-              <div className="text-sm font-mono terminal-text-dim">
-                PUZZLE_1_OF_2 | SEQUENCE: {sequence.length}/{correctSequence.length}
-              </div>
-            </div>
-          </div>
+                {/* Hint Button */}
+                <div className="flex justify-end mb-4">
+                  <button
+                    onClick={() => setShowHint(!showHint)}
+                    className="win95-button text-xs flex items-center gap-1"
+                  >
+                    <Lightbulb size={12} />
+                    HINT
+                  </button>
+                </div>
 
-          {/* Debug Info */}
-          <div className="mt-4 text-center">
-            <div className="terminal-box p-2">
-              <div className="text-xs font-mono terminal-text-dim">
-                DEBUG: Current sequence [{sequence.join(', ')}] | Target: [{correctSequence.join(', ')}]
+                {/* Hint Panel */}
+                {showHint && (
+                  <div className="win95-dialog mb-4">
+                    <div className="text-xs space-y-1">
+                      <div className="font-bold">💡 ASSEMBLY HINTS:</div>
+                      <div>• Think about the logical flow of creation</div>
+                      <div>• Start with gathering, then processing, then delivering</div>
+                      <div>• Finally measure the impact</div>
+                      <div>• Drag each component to the assembly area below</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Machine Parts Grid */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  {machineParts.map((part) => (
+                    <div
+                      key={part.id}
+                      draggable={!sequence.includes(part.type)}
+                      onDragStart={(e) => handleDragStart(e, part.type)}
+                      className={`win95-button p-3 text-center cursor-move ${
+                        sequence.includes(part.type) 
+                          ? 'opacity-50 cursor-not-allowed' 
+                          : 'hover:bg-blue-100'
+                      }`}
+                      style={{ userSelect: 'none' }}
+                    >
+                      <div className="text-lg mb-1">{part.icon}</div>
+                      <div className="text-xs font-bold">{part.type}</div>
+                      <div className="text-xs">{part.name}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Assembly Zone */}
+                <div
+                  onDragOver={handleDragOver}
+                  onDragEnter={handleDragEnter}
+                  onDrop={handleDrop}
+                  className="win95-info-box p-4 min-h-16 mb-4 border-dashed border-2 border-blue-500"
+                >
+                  <div className="text-xs font-bold mb-2">ASSEMBLY_SEQUENCE:</div>
+                  <div className="flex flex-wrap gap-2">
+                    {sequence.length === 0 ? (
+                      <div className="text-xs text-gray-600">DROP COMPONENTS HERE IN ORDER...</div>
+                    ) : (
+                      sequence.map((item, index) => (
+                        <div key={index} className="text-xs bg-blue-200 px-2 py-1 border border-blue-400">
+                          {index + 1}. {item}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div className="space-y-2">
+                  <button
+                    onClick={resetSequence}
+                    className="win95-button text-xs"
+                  >
+                    [RESET_ASSEMBLY]
+                  </button>
+                  
+                  {showSuccess && (
+                    <div className="win95-dialog">
+                      <div className="text-xs font-bold text-green-800 flickering">
+                        &gt;&gt; MACHINE RESTORED! PROCEEDING TO NEXT PHASE...
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Status */}
+                <div className="win95-info-box mt-4">
+                  <div className="text-xs">
+                    STATUS: PUZZLE_1_OF_2 | PROGRESS: {sequence.length}/{correctSequence.length}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Monitor Controls */}
+      <div className="monitor-controls">
+        <div className="monitor-control-knob"></div>
+        <div className="monitor-control-knob"></div>
+      </div>
+
+      {/* Monitor Brand */}
+      <div className="monitor-brand">
+        THINKERBELL CRT-95
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
+
 import { useState, useEffect } from 'react';
 import { Lightbulb } from 'lucide-react';
 import GlitchText from '../components/GlitchText';
-import NavigationHeader from '../components/NavigationHeader';
+import PixelatedFairy from '../components/PixelatedFairy';
 
 interface Project {
   title: string;
   description: string;
   image: string;
-  figmaEmbed?: string;
 }
 
 const Reveal = () => {
@@ -18,21 +18,18 @@ const Reveal = () => {
   const projects: Project[] = [
     {
       title: "Measured Magic Interface",
-      description: "A revolutionary UX framework that quantifies creative impact through user engagement metrics.",
-      image: "🎨",
-      figmaEmbed: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example1"
+      description: "Revolutionary UX framework that quantifies creative impact",
+      image: "🎨"
     },
     {
-      title: "Creative Friction Analyzer",
-      description: "AI-powered tool that identifies optimal resistance points in the design process for maximum innovation.",
-      image: "⚡",
-      figmaEmbed: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example2"
+      title: "Creative Friction Analyzer", 
+      description: "AI-powered tool for optimal design resistance points",
+      image: "⚡"
     },
     {
       title: "Mind Expansion Protocols",
-      description: "Systematic approach to client participation in transformative design thinking sessions.",
-      image: "🧠",
-      figmaEmbed: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example3"
+      description: "Systematic approach to transformative design thinking",
+      image: "🧠"
     }
   ];
 
@@ -51,210 +48,227 @@ const Reveal = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#00F0FF] relative overflow-hidden">
-      <NavigationHeader />
-      {/* VHS Overlay */}
-      <div className="vhs-overlay"></div>
-      <div className="scanlines"></div>
-      
-      <div className="relative z-10 min-h-screen p-4">
-        {/* Header with Hint Button */}
-        <div className="flex justify-between items-start mb-8 pt-20">
-          <div className="text-center flex-1">
-            <GlitchText 
-              text="THE MISSING TINKER" 
-              className="text-4xl md:text-6xl font-mono font-bold text-[#0055FF] mb-4"
-            />
-            <p className="text-xl font-mono text-[#00F0FF] font-bold">
-              DIGITAL CORE RESTORED • MAGIC HOUR COMMENCED
-            </p>
+    <div className="win95-monitor">
+      {/* Monitor Bezel */}
+      <div className="monitor-bezel">
+        {/* Monitor Screen */}
+        <div className="monitor-screen">
+          {/* Windows 95 Taskbar */}
+          <div className="win95-taskbar">
+            <div className="start-button">
+              <div className="start-logo"></div>
+              <span>Start</span>
+            </div>
+            <div className="system-tray">
+              <div className="tray-icons">
+                <span>🔊</span>
+                <span>📶</span>
+              </div>
+              <div className="clock">{new Date().toLocaleTimeString().slice(0, 5)}</div>
+            </div>
           </div>
-          
-          <button
-            onClick={() => setShowHint(!showHint)}
-            className="bg-[#0055FF] hover:bg-[#00F0FF] text-black font-mono font-bold py-2 px-4 rounded flex items-center gap-2 transition-all duration-300"
-            title="About This Experience"
-          >
-            <Lightbulb size={20} />
-            <span>INFO</span>
-          </button>
-        </div>
 
-        {/* Info Panel */}
-        {showHint && (
-          <div className="max-w-4xl mx-auto mb-8">
-            <div className="bg-black/90 border border-[#0055FF] p-6 rounded-lg">
-              <div className="flex items-start gap-3">
-                <Lightbulb size={24} className="text-[#00F0FF] mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="text-xl font-mono font-bold text-[#00F0FF] mb-3">
-                    🎉 CONGRATULATIONS!
-                  </h3>
-                  <div className="text-gray-300 font-mono space-y-2">
-                    <p>• You've successfully completed all puzzles in the Missing Tinker Kit</p>
-                    <p>• This is the final reveal showing Thinkerbell's "Measured Magic" portfolio</p>
-                    <p>• Use the navigation buttons to explore different projects</p>
-                    <p>• Click the activation button to contact Thinkerbell directly</p>
+          {/* Desktop Area */}
+          <div className="win95-desktop">
+            {/* Desktop Icons */}
+            <div className="desktop-icons">
+              <div className="desktop-icon">
+                <div className="icon-image">💻</div>
+                <div className="icon-label">My Computer</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">📁</div>
+                <div className="icon-label">My Documents</div>
+              </div>
+              <div className="desktop-icon">
+                <div className="icon-image">🗑️</div>
+                <div className="icon-label">Recycle Bin</div>
+              </div>
+            </div>
+
+            {/* Floating Pixelated Fairy */}
+            <div className="absolute top-16 right-16 z-30">
+              <PixelatedFairy />
+            </div>
+
+            {/* Success Dialog */}
+            <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-40">
+              <div className="win95-window">
+                <div className="window-titlebar">
+                  <div className="window-title">
+                    <span className="title-icon">🔔</span>
+                    Tinkerbell
+                  </div>
+                  <div className="window-controls">
+                    <button className="control-btn">_</button>
+                    <button className="control-btn">□</button>
+                    <button className="control-btn">×</button>
+                  </div>
+                </div>
+                <div className="window-content p-4">
+                  <div className="flex items-center mb-4">
+                    <div className="text-4xl mr-3">⚠️</div>
+                    <div>
+                      <div className="font-bold text-red-800 text-sm">CRITICAL SYSTEM FAILURE!!!</div>
+                      <div className="text-xs"><span className="font-bold text-yellow-600">404</span>: MAGIC SIGNAL LOST</div>
+                    </div>
+                  </div>
+                  <div className="win95-button text-center py-2 text-xs font-bold bg-green-200">
+                    SYSTEM RESTORED - MAGIC HOUR COMMENCED!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Portfolio Window */}
+            <div className="win95-window" style={{ top: '45%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px' }}>
+              {/* Window Title Bar */}
+              <div className="window-titlebar">
+                <div className="window-title">
+                  <span className="title-icon">💻</span>
+                  Terminal
+                </div>
+                <div className="window-controls">
+                  <button className="control-btn">_</button>
+                  <button className="control-btn">□</button>
+                  <button className="control-btn">×</button>
+                </div>
+              </div>
+
+              {/* Window Content */}
+              <div className="window-content">
+                {/* Terminal Header */}
+                <div className="bg-black text-green-400 p-3 font-mono text-xs mb-4 border-2 inset">
+                  <div>&gt;&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
+                  <div>&gt;&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
+                  <div className="text-red-400">&gt;&gt; LAB CREDENTIALS REQUIRED</div>
+                  <div>&gt;&gt; Enter Lab Credentials:</div>
+                  <div className="text-white font-bold">&gt;&gt; ACCESS GRANTED</div>
+                  <div className="text-cyan-400">&gt;&gt; ✨ TINKER TIP</div>
+                  <div>&gt;&gt; Remember how we create magic:</div>
+                  <div>&gt;&gt; Fuel</div>
+                  <div>&gt;&gt; Build</div>
+                  <div>&gt;&gt; Delight</div>
+                  <div>&gt;&gt; The order never changes!</div>
+                  <div className="text-cyan-400">&gt;&gt; TINKERUP!</div>
+                </div>
+
+                {/* Hint Button */}
+                <div className="flex justify-end mb-4">
+                  <button
+                    onClick={() => setShowHint(!showHint)}
+                    className="win95-button text-xs flex items-center gap-1"
+                  >
+                    <Lightbulb size={12} />
+                    INFO
+                  </button>
+                </div>
+
+                {/* Info Panel */}
+                {showHint && (
+                  <div className="win95-dialog mb-4">
+                    <div className="text-xs space-y-1">
+                      <div className="font-bold">🎉 CONGRATULATIONS!</div>
+                      <div>• You've completed all puzzles successfully</div>
+                      <div>• This shows Thinkerbell's "Measured Magic" portfolio</div>
+                      <div>• Use buttons to explore different projects</div>
+                      <div>• Click activation button to contact directly</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Project Icons Display */}
+                <div className="bg-white border-2 inset p-4 mb-4 min-h-32">
+                  <div className="flex items-center justify-between mb-4">
+                    <button 
+                      onClick={prevProject}
+                      className="win95-button text-xs px-2 py-1"
+                    >
+                      ← PREV
+                    </button>
+                    
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">{projects[currentProject].image}</div>
+                      <div className="text-xs font-bold">{projects[currentProject].title}</div>
+                      <div className="text-xs text-gray-600">{currentProject + 1} / {projects.length}</div>
+                    </div>
+                    
+                    <button 
+                      onClick={nextProject}
+                      className="win95-button text-xs px-2 py-1"
+                    >
+                      NEXT →
+                    </button>
+                  </div>
+                  
+                  <div className="text-xs text-center">
+                    {projects[currentProject].description}
+                  </div>
+                </div>
+
+                {/* Manifesto Section */}
+                <details 
+                  className="win95-dialog mb-4"
+                  onToggle={(e) => setShowManifesto((e.target as HTMLDetailsElement).open)}
+                >
+                  <summary className="text-xs font-bold cursor-pointer text-red-800">
+                    THE THINKERBELL MANIFESTO
+                  </summary>
+                  
+                  {showManifesto && (
+                    <div className="mt-3 space-y-2 text-xs">
+                      <div>
+                        <div className="font-bold text-blue-800">3 MEASURED MAGIC UPGRADES:</div>
+                        <div>• Client participation in Magic Hour sessions</div>
+                        <div>• MMI 'Creative Friction' metrics optimization</div>
+                        <div>• Tinker-led Mind Expansion Projects</div>
+                      </div>
+                      
+                      <div>
+                        <div className="font-bold text-blue-800">THE PHILOSOPHY:</div>
+                        <div>Magic without measurement is chaos. At Thinkerbell, we believe the future lies in systematic application of creative forces.</div>
+                      </div>
+                    </div>
+                  )}
+                </details>
+
+                {/* Contact Section */}
+                <div className="text-center space-y-2">
+                  <div className="text-xs font-bold">READY FOR MAGIC HOUR?</div>
+                  
+                  <button
+                    onClick={handleContactClick}
+                    className="win95-button text-xs px-4 py-2 font-bold"
+                  >
+                    🚨 ACTIVATE THINKERBELL PROTOCOL
+                  </button>
+                  
+                  <div className="text-xs text-gray-600">
+                    This will open your email client with activation sequence
+                  </div>
+                </div>
+
+                {/* Status */}
+                <div className="win95-info-box mt-4">
+                  <div className="text-xs">
+                    THINKERBELL DIGITAL TINKER KIT v4.0 • MAGIC MEASURED • IMPACT AMPLIFIED
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Success Message */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <div className="bg-black/80 border border-[#00F0FF] p-6 rounded-lg text-center glitch-border">
-            <h2 className="text-2xl font-mono font-bold text-[#00F0FF] mb-4">
-              CONGRATULATIONS, MAGIC MAKER!
-            </h2>
-            <p className="text-lg font-mono text-gray-300 leading-relaxed font-medium">
-              You've successfully restored the Measured Magic Machine and activated the Thinkerbell Protocol. 
-              The digital tinker kit is now complete, and magic hour has begun. 
-              Prepare to witness the fusion of design thinking and systematic enchantment.
-            </p>
-          </div>
         </div>
+      </div>
 
-        {/* Portfolio Carousel */}
-        <div className="max-w-5xl mx-auto mb-12">
-          <h3 className="text-2xl font-mono font-bold text-[#0055FF] text-center mb-8">
-            MEASURED MAGIC PORTFOLIO
-          </h3>
-          
-          <div className="bg-black/90 border border-[#0055FF] rounded-lg p-6">
-            <div className="flex items-center justify-between mb-6">
-              <button 
-                onClick={prevProject}
-                className="bg-[#0055FF] hover:bg-[#00F0FF] text-black font-mono font-bold py-2 px-4 transition-all duration-300"
-              >
-                ← PREV
-              </button>
-              
-              <div className="text-center">
-                <div className="text-6xl mb-2">{projects[currentProject].image}</div>
-                <h4 className="text-xl font-mono font-bold text-[#00F0FF]">
-                  {projects[currentProject].title}
-                </h4>
-                <p className="text-sm text-gray-400 font-mono">
-                  {currentProject + 1} / {projects.length}
-                </p>
-              </div>
-              
-              <button 
-                onClick={nextProject}
-                className="bg-[#0055FF] hover:bg-[#00F0FF] text-black font-mono font-bold py-2 px-4 transition-all duration-300"
-              >
-                NEXT →
-              </button>
-            </div>
-            
-            {/* Project Description */}
-            <div className="text-center mb-6">
-              <p className="text-lg font-mono text-gray-300 leading-relaxed font-medium">
-                {projects[currentProject].description}
-              </p>
-            </div>
-            
-            {/* Figma Embed Placeholder */}
-            <div className="bg-gray-900 border border-gray-700 rounded-lg h-64 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🎨</div>
-                <p className="text-gray-400 font-mono font-bold">
-                  FIGMA PROTOTYPE PREVIEW
-                </p>
-                <p className="text-sm text-gray-500 mt-2 font-mono">
-                  Interactive design would be embedded here
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Monitor Controls */}
+      <div className="monitor-controls">
+        <div className="monitor-control-knob"></div>
+        <div className="monitor-control-knob"></div>
+      </div>
 
-        {/* Manifesto Section */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <details 
-            className="bg-black/90 border border-[#E62E2E] rounded-lg p-6"
-            onToggle={(e) => setShowManifesto((e.target as HTMLDetailsElement).open)}
-          >
-            <summary className="text-2xl font-mono font-bold text-[#E62E2E] cursor-pointer hover:text-[#00F0FF] transition-colors mb-4">
-              THE THINKERBELL MANIFESTO
-            </summary>
-            
-            {showManifesto && (
-              <div className="space-y-6 font-mono text-gray-300 animate-fade-in">
-                <div>
-                  <h4 className="text-xl font-bold text-[#0055FF] mb-3">
-                    3 MEASURED MAGIC UPGRADES:
-                  </h4>
-                  <ul className="space-y-2 ml-4">
-                    <li className="flex items-start">
-                      <span className="text-[#00F0FF] mr-2">•</span>
-                      <span className="font-medium">Client participation in Magic Hour sessions</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-[#00F0FF] mr-2">•</span>
-                      <span className="font-medium">MMI 'Creative Friction' metrics for innovation optimization</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-[#00F0FF] mr-2">•</span>
-                      <span className="font-medium">Tinker-led Mind Expansion Projects</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="text-lg font-bold text-[#0055FF] mb-2">
-                    THE PHILOSOPHY:
-                  </h4>
-                  <p className="leading-relaxed font-medium">
-                    Magic without measurement is chaos. Measurement without magic is sterile. 
-                    At Thinkerbell, we believe the future of design lies in the systematic 
-                    application of creative forces. Every pixel placed, every interaction 
-                    crafted, every user journey mapped - all guided by data, all infused 
-                    with wonder.
-                  </p>
-                </div>
-                
-                <div className="text-center py-4">
-                  <a 
-                    href="/manifesto.pdf" 
-                    className="text-[#00F0FF] hover:text-white underline transition-colors font-bold"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    DOWNLOAD FULL MANIFESTO (PDF)
-                  </a>
-                </div>
-              </div>
-            )}
-          </details>
-        </div>
-
-        {/* Contact Section */}
-        <div className="max-w-2xl mx-auto text-center mb-8">
-          <h3 className="text-2xl font-mono font-bold text-[#0055FF] mb-6">
-            READY FOR MAGIC HOUR?
-          </h3>
-          
-          <button
-            onClick={handleContactClick}
-            className="bg-gradient-to-r from-[#0055FF] to-[#00F0FF] hover:from-[#00F0FF] hover:to-[#0055FF] text-black font-mono font-bold py-4 px-8 rounded-lg text-xl transition-all duration-300 hover:shadow-glow transform hover:scale-105"
-          >
-            🚨 ACTIVATE THINKERBELL PROTOCOL
-          </button>
-          
-          <p className="text-sm font-mono text-gray-400 mt-4 font-medium">
-            This will open your email client with the activation sequence
-          </p>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center py-8">
-          <p className="text-sm font-mono text-gray-500 font-medium">
-            THINKERBELL DIGITAL TINKER KIT v4.0 • MAGIC MEASURED • IMPACT AMPLIFIED
-          </p>
-        </div>
+      {/* Monitor Brand */}
+      <div className="monitor-brand">
+        THINKERBELL CRT-95
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import Puzzle1 from "./pages/Puzzle1";
 import Puzzle2 from "./pages/Puzzle2";
 import Reveal from "./pages/Reveal";
 import NotFound from "./pages/NotFound";
+import TestRunner from "./components/TestRunner";
 
 const queryClient = new QueryClient();
 
@@ -17,13 +18,13 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <TestRunner />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/puzzle1" element={<Puzzle1 />} />
           <Route path="/puzzle2" element={<Puzzle2 />} />
           <Route path="/reveal" element={<Reveal />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
