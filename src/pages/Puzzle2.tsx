@@ -80,7 +80,7 @@ const Puzzle2 = () => {
       {/* Monitor Bezel */}
       <div className="monitor-bezel">
         {/* Monitor Screen */}
-        <div className="monitor-screen">
+        <div className="monitor-screen p-2 sm:p-4">
           {/* Windows 95 Taskbar */}
           <div className="win95-taskbar">
             <div className="start-button">
@@ -115,12 +115,12 @@ const Puzzle2 = () => {
             </div>
 
             {/* Floating Pixelated Fairy */}
-            <div className="absolute top-16 right-16 z-30">
+            <div className="absolute top-4 right-4 z-30">
               <PixelatedFairy />
             </div>
 
-            {/* Main Terminal Window */}
-            <div className="win95-window">
+            {/* Main Terminal Window - Responsive sizing */}
+            <div className="win95-window max-w-[calc(100vw-120px)] max-h-[calc(100vh-120px)] overflow-auto">
               {/* Window Title Bar */}
               <div className="window-titlebar">
                 <div className="window-title">
@@ -134,8 +134,8 @@ const Puzzle2 = () => {
                 </div>
               </div>
 
-              {/* Window Content */}
-              <div className="window-content">
+              {/* Window Content - Scrollable */}
+              <div className="window-content overflow-y-auto max-h-[calc(100vh-200px)]">
                 {/* Terminal Header Info */}
                 <div className="win95-info-box mb-4">
                   <div className="space-y-1 text-xs">
@@ -170,8 +170,8 @@ const Puzzle2 = () => {
                   </div>
                 )}
 
-                {/* Terminal Output */}
-                <div className="bg-black text-green-400 p-4 h-48 overflow-y-auto font-mono text-xs mb-4 border-2 inset">
+                {/* Terminal Output - Responsive height */}
+                <div className="bg-black text-green-400 p-3 sm:p-4 h-32 sm:h-48 overflow-y-auto font-mono text-xs mb-4 border-2 inset">
                   {terminalHistory.map((line, index) => (
                     <div 
                       key={index} 
@@ -207,7 +207,7 @@ const Puzzle2 = () => {
                 {showCountdown && (
                   <div className="win95-dialog text-center mb-4">
                     <div className="text-xs font-bold mb-2">MAGIC_HOUR_ACTIVATED</div>
-                    <div className="text-2xl font-bold mb-2">{formatTime(countdown)}</div>
+                    <div className="text-xl sm:text-2xl font-bold mb-2">{formatTime(countdown)}</div>
                     <div className="text-xs">&gt;&gt; THE BELL RESONATES... MAGIC HOUR APPROACHES...</div>
                   </div>
                 )}

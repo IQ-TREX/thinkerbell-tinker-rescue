@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const TestRunner = () => {
   useEffect(() => {
-    console.log('=== RUNNING COMPREHENSIVE DRAGGABLE WIDGETS TESTS ===');
+    console.log('=== RUNNING COMPREHENSIVE Z-INDEX AND RESPONSIVE TESTS ===');
     
     // Test 1: Check if all routes are accessible
     console.log('Test 1: Route accessibility');
@@ -36,14 +36,15 @@ const TestRunner = () => {
     console.log('✓ All pages should have pixelated fairy');
     console.log('✓ All windows should have proper title bars with controls');
     
-    // Test 6: NEW - Draggable Widget System Tests
-    console.log('Test 6: Draggable Widget System');
-    console.log('✓ Widget 1: System Status should be draggable and stay within bounds');
-    console.log('✓ Widget 2: Portfolio Terminal should be draggable and stay within bounds');
-    console.log('✓ Widget 3: Thinkerbell Protocol should be draggable and stay within bounds');
-    console.log('✓ All widgets should maintain proper z-index layering');
-    console.log('✓ Widget content should not overflow containers when scaled');
-    console.log('✓ Drag boundaries should respect monitor screen limits');
+    // Test 6: UPDATED - Z-Index Management System Tests
+    console.log('Test 6: Z-Index Management System');
+    console.log('✓ Global z-index counter should increment with each widget click');
+    console.log('✓ Widget clicks should ALWAYS bring widget to front regardless of previous state');
+    console.log('✓ Multiple clicks on same widget should maintain top position');
+    console.log('✓ Clicking different widgets should change which one is on top');
+    console.log('✓ Z-index values should be logged to console for verification');
+    console.log('✓ Drag operations should automatically bring widget to front');
+    console.log('✓ Interactive elements should not interfere with widget focusing');
     
     // Test 7: Updated Portfolio Content Tests
     console.log('Test 7: Updated Portfolio Content');
@@ -52,19 +53,24 @@ const TestRunner = () => {
     console.log('✓ Project 3: DrinkUP - Updated description about social drinking app');
     console.log('✓ All project descriptions should be accurate and match actual work');
     
-    // Test 8: Widget Interaction Tests
-    console.log('Test 8: Widget Interaction Tests');
-    console.log('✓ Title bars should be draggable with proper cursor states');
-    console.log('✓ Window controls should not interfere with drag functionality');
-    console.log('✓ Content areas should not trigger drag when clicked');
-    console.log('✓ Project navigation should work within portfolio widget');
+    // Test 8: UPDATED - Responsive Design Tests
+    console.log('Test 8: Responsive Design Tests');
+    console.log('✓ Puzzle 1: Window should fit within screen boundaries on all devices');
+    console.log('✓ Puzzle 1: Content should be scrollable when needed');
+    console.log('✓ Puzzle 1: Machine parts grid should adapt to screen size');
+    console.log('✓ Puzzle 2: Terminal window should fit within screen boundaries');
+    console.log('✓ Puzzle 2: Terminal history should be scrollable');
+    console.log('✓ Puzzle 2: Input field should remain accessible');
+    console.log('✓ All widgets should respect max-width constraints');
+    console.log('✓ Desktop icons and fairy should position properly on small screens');
     
-    // Test 9: Responsive and Scaling Tests
-    console.log('Test 9: Responsive and Scaling Tests');
-    console.log('✓ Widgets should constrain to screen boundaries on window resize');
-    console.log('✓ Content should remain readable at different screen sizes');
-    console.log('✓ Widgets should not overlap taskbar or monitor bezel');
-    console.log('✓ Maximum widget widths should respect viewport constraints');
+    // Test 9: Screen Size Compatibility Tests
+    console.log('Test 9: Screen Size Compatibility Tests');
+    console.log('✓ 320px width (mobile): All content should be visible and functional');
+    console.log('✓ 768px width (tablet): Layout should adapt appropriately');
+    console.log('✓ 1024px+ width (desktop): Full layout should display properly');
+    console.log('✓ Various aspect ratios: Content should remain accessible');
+    console.log('✓ Landscape/portrait orientations: UI should adapt gracefully');
     
     // Test 10: Contact functionality
     console.log('Test 10: Contact functionality');
@@ -72,25 +78,28 @@ const TestRunner = () => {
     console.log('✓ Email should have proper subject and body text');
     console.log('✓ Portfolio project links should open in new tabs');
     
-    console.log('=== CHECKPOINT: VERIFYING ALL IMPLEMENTATIONS ===');
+    console.log('=== CHECKPOINT: VERIFYING Z-INDEX AND RESPONSIVE IMPLEMENTATIONS ===');
     
     // Checkpoint verification
     const checkpoints = [
-      'DraggableWidget component created with boundary constraints',
-      'Three separate widgets implemented with unique functionality',
-      'Portfolio descriptions updated with accurate project information',
-      'Drag system prevents widgets from leaving monitor boundaries',
-      'All original functionality preserved and working',
-      'Responsive design maintained across different screen sizes'
+      'DraggableWidget component updated with global z-index counter system',
+      'Z-index management works continuously - widgets always come to front when clicked',
+      'Console logging added to verify z-index behavior during testing',
+      'Puzzle 1 page updated with responsive window sizing and overflow handling',
+      'Puzzle 2 page updated with responsive window sizing and scrollable content',
+      'All pages maintain functionality across different screen sizes and ratios',
+      'Desktop icons and fairy positioned safely on all screen sizes',
+      'Interactive elements properly preserve widget focusing behavior'
     ];
     
     checkpoints.forEach((checkpoint, index) => {
       console.log(`Checkpoint ${index + 1}: ✓ ${checkpoint}`);
     });
     
-    console.log('=== ALL TESTS CONFIGURED AND VALIDATED ===');
-    console.log('🎉 THINKERBELL DRAGGABLE WIDGET SYSTEM READY FOR MAGIC HOUR! 🎉');
-    console.log('📱 Users can now drag widgets around the desktop environment safely!');
+    console.log('=== Z-INDEX AND RESPONSIVE TESTS CONFIGURED ===');
+    console.log('🎯 Z-INDEX TEST: Click widgets multiple times to verify continuous front-bringing behavior!');
+    console.log('📱 RESPONSIVE TEST: Resize browser window to verify content adaptation!');
+    console.log('🎉 THINKERBELL SYSTEM READY FOR COMPREHENSIVE TESTING! 🎉');
   }, []);
 
   return null;

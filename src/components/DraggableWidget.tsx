@@ -11,6 +11,9 @@ interface DraggableWidgetProps {
   onFocus?: () => void;
 }
 
+// Global z-index counter to ensure proper layering
+let globalZIndex = 1000;
+
 const DraggableWidget: React.FC<DraggableWidgetProps> = ({
   title,
   titleIcon,
@@ -27,6 +30,15 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const widgetRef = useRef<HTMLDivElement>(null);
 
+  const bringToFront = () => {
+    globalZIndex += 1;
+    const newZ = globalZIndex;
+    setCurrentZ(newZ);
+    setIsFocused(true);
+    console.log(`Widget "${title}" brought to front with z-index:`, newZ);
+    onFocus && onFocus();
+  };
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('.window-controls')) return;
     
@@ -35,9 +47,9 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
       x: e.clientX - position.x,
       y: e.clientY - position.y
     });
-    setCurrentZ(1000); // High z-index while dragging
-    setIsFocused(true);
-    onFocus && onFocus();
+    
+    // Always bring to front when starting drag
+    bringToFront();
     e.preventDefault();
   };
 
@@ -66,7 +78,7 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    setCurrentZ(200); // Keep focused widgets on top after dragging
+    console.log(`Widget "${title}" drag ended, current z-index:`, currentZ);
   };
 
   const handleWidgetClick = (e: React.MouseEvent) => {
@@ -75,9 +87,8 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
       return;
     }
     
-    setIsFocused(true);
-    setCurrentZ(200);
-    onFocus && onFocus();
+    // Always bring clicked widgets to front
+    bringToFront();
   };
 
   useEffect(() => {
