@@ -66,12 +66,17 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    setCurrentZ(isFocused ? 100 : zIndex); // Higher z-index for focused widgets
+    setCurrentZ(200); // Keep focused widgets on top after dragging
   };
 
-  const handleWidgetClick = () => {
+  const handleWidgetClick = (e: React.MouseEvent) => {
+    // Don't focus if clicking on interactive elements
+    if ((e.target as HTMLElement).closest('button, input, textarea, select, details, summary')) {
+      return;
+    }
+    
     setIsFocused(true);
-    setCurrentZ(100);
+    setCurrentZ(200);
     onFocus && onFocus();
   };
 

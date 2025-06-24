@@ -114,10 +114,10 @@ const Reveal = () => {
               >
                 <div className="p-4">
                   <div className="flex items-center mb-4">
-                    <div className="text-4xl mr-3">⚠️</div>
+                    <div className="text-4xl mr-3">✅</div>
                     <div>
-                      <div className="font-bold text-red-800 text-sm">CRITICAL SYSTEM FAILURE!!!</div>
-                      <div className="text-xs"><span className="font-bold text-yellow-600">404</span>: MAGIC SIGNAL LOST</div>
+                      <div className="font-bold text-green-600 text-sm">SYSTEM IS BACK UP</div>
+                      <div className="text-xs"><span className="font-bold text-green-500">200</span>: MAGIC SIGNAL FOUND</div>
                     </div>
                   </div>
                   <div className="win95-button text-center py-2 text-xs font-bold bg-green-200 mb-4">
@@ -126,9 +126,9 @@ const Reveal = () => {
                   
                   {/* Terminal Status */}
                   <div className="bg-black text-green-400 p-3 font-mono text-xs border-2 inset">
-                    <div>&gt;&gt; TINKER KIT #4 (DIGITAL CORE) CORRUPTED</div>
-                    <div>&gt;&gt; MEASURED MAGIC MACHINE: OFFLINE</div>
-                    <div className="text-red-400">&gt;&gt; LAB CREDENTIALS REQUIRED</div>
+                    <div>&gt;&gt; TINKER KIT #4 (DIGITAL CORE) RESTORED</div>
+                    <div>&gt;&gt; MEASURED MAGIC MACHINE: ONLINE</div>
+                    <div className="text-green-400">&gt;&gt; LAB CREDENTIALS ACCEPTED</div>
                     <div>&gt;&gt; Enter Lab Credentials:</div>
                     <div className="text-white font-bold">&gt;&gt; ACCESS GRANTED</div>
                     <div className="text-cyan-400">&gt;&gt; ✨ TINKER TIP</div>
@@ -267,10 +267,6 @@ const Reveal = () => {
                     >
                       🚨 ACTIVATE THINKERBELL PROTOCOL
                     </button>
-                    
-                    <div className="text-xs text-gray-600">
-                      This will open your email client with activation sequence
-                    </div>
                   </div>
                 </div>
               </DraggableWidget>
