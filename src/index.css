@@ -286,7 +286,108 @@
   line-height: 1.1;
 }
 
-/* Windows 95 Window */
+/* Windows 95 Draggable Widgets */
+.win95-window-frame {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  font-family: 'MS Sans Serif', sans-serif;
+}
+
+.widget-focused .win95-window-frame {
+  border: 2px outset #c0c0c0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.widget-unfocused .win95-window-frame {
+  border: 2px outset #c0c0c0;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Windows 95 Title Bar */
+.win95-titlebar {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  cursor: grab;
+  user-select: none;
+}
+
+.win95-titlebar:active {
+  cursor: grabbing;
+}
+
+.titlebar-active {
+  background: linear-gradient(90deg, #000080 0%, #0040c0 100%);
+  color: white;
+}
+
+.titlebar-inactive {
+  background: linear-gradient(90deg, #808080 0%, #a0a0a0 100%);
+  color: #c0c0c0;
+}
+
+.titlebar-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.titlebar-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.titlebar-text {
+  font-size: 11px;
+  font-weight: bold;
+  font-family: 'MS Sans Serif', sans-serif;
+}
+
+.window-controls {
+  display: flex;
+  gap: 1px;
+}
+
+.control-btn {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  font-size: 8px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'MS Sans Serif', sans-serif;
+  line-height: 1;
+}
+
+.control-btn:hover {
+  background: #d0d0d0;
+}
+
+.control-btn:active {
+  border: 1px inset #c0c0c0;
+}
+
+.close-btn:hover {
+  background: #ff4040;
+  color: white;
+}
+
+/* Window Body */
+.win95-window-body {
+  background: #c0c0c0;
+  padding: 8px;
+  min-height: 100px;
+}
+
+/* Windows 95 Window (Legacy - for backward compatibility) */
 .win95-window {
   position: absolute;
   top: 50%;
@@ -318,30 +419,6 @@
   gap: 4px;
   font-size: 11px;
   font-weight: bold;
-}
-
-.window-controls {
-  display: flex;
-  gap: 1px;
-}
-
-.control-btn {
-  width: 16px;
-  height: 14px;
-  background: #c0c0c0;
-  border: 1px outset #c0c0c0;
-  font-size: 8px;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'MS Sans Serif', sans-serif;
-}
-
-.control-btn:active {
-  border: 1px inset #c0c0c0;
 }
 
 .window-content {
